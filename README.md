@@ -6,4 +6,3 @@ Directory includes:
 - Sources files for RFBS in /src
 - Scripts for performing analyses and generating plots from the RFBS paper
 - Data file for Viburnum Analyses, including the phylogenies and data on observed estbalished affinities, included enabled affinities and excludes enabled affinities in /data/emp/viburnum
-- Raw results (posterior distributions, ancestral state reconstruction samples) in /outfiles
