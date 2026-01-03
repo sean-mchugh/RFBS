@@ -164,83 +164,13 @@ RFBS_dir_names=
 #      "Bvib_3nB_Exp0p5_3000000_admat_excf_3.biomes.USDA_eco_allo_clado_2g_1g_1l_rf_gl_ds"
 #  )
 
-RFBS_dir_names = c(
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_incf_bold_excf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_incf_bold_excf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_incf_bold_excf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_incf_bold_excf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_incf_bold_noexcf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_incf_bold_noexcf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_incf_bold_noexcf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_incf_bold_noexcf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_incf_cons_excf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_incf_cons_excf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_incf_cons_excf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_incf_cons_excf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_incf_cons_noexcf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_incf_cons_noexcf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_incf_cons_noexcf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_incf_cons_noexcf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_noincf_bold_excf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_noincf_bold_excf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_noincf_bold_excf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_noincf_bold_excf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_noincf_bold_noexcf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_noincf_bold_noexcf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_noincf_bold_noexcf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_noincf_bold_noexcf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_noincf_cons_excf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_noincf_cons_excf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_noincf_cons_excf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_noincf_cons_excf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_noincf_cons_noexcf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_noincf_cons_noexcf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_noincf_cons_noexcf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_admat_noincf_cons_noexcf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_incf_bold_excf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_incf_bold_excf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_incf_bold_excf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_incf_bold_excf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_incf_bold_noexcf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_incf_bold_noexcf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_incf_bold_noexcf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_incf_bold_noexcf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_incf_cons_excf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_incf_cons_excf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_incf_cons_excf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_incf_cons_excf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_incf_cons_noexcf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_incf_cons_noexcf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_incf_cons_noexcf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_incf_cons_noexcf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_noincf_bold_excf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_noincf_bold_excf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_noincf_bold_excf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_noincf_bold_excf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_noincf_bold_noexcf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_noincf_bold_noexcf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_noincf_bold_noexcf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_noincf_bold_noexcf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_noincf_cons_excf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_noincf_cons_excf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_noincf_cons_excf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_noincf_cons_excf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_noincf_cons_noexcf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_noincf_cons_noexcf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-  "Bvib_3nB_Exp0p5_3000000_Foss_noincf_cons_noexcf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-  "Bvib_3nB_Exp0p5_3000000_Foss_noincf_cons_noexcf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa"
-  
-)
 
+new_RFBS_dir_names=  list.files("../../outfiles/emp/viburnum/sub/")[(grep("Bvib_3nB_Exp0p5_3000000",list.files()  ))]
+old_RFBS_dir_names=  list.files("/Volumes/michael.landis/Active/Sean/RFBS/outfiles/emp/viburnum/sub/")[(grep("Bvib_3nB_Exp0p5_10000000",list.files()  ))][c( 5,1,6,7, 2,3,8,4)]
 
-RFBS_dir_names = RFBS_dir_names[grep("RJa", RFBS_dir_names )] 
+RFBS_dir_names=c(old_RFBS_dir_names, new_RFBS_dir_names)
 
-#new_RFBS_dir_names=  list.files() [(grep("Bvib_3nB_Exp0p5_3000000",list.files()  ))]
-#old_RFBS_dir_names=  list.files() [(grep("Bvib_3nB_Exp0p5_10000000",list.files()  ))][c( 5,1,6,7, 2,3,8,4)]
-
-#RFBS_dir_names=c(old_RFBS_dir_names, new_RFBS_dir_names)
-
-evidence_vec=c("germination.only" ,"germination.conservative" ,"germination.bold", "leafing.conservative", "leafing.bold","USDA", "admat", "_incf","_excf"  )
+evidence_vec=c("germination.only" ,"germination.conservative" ,"germination.bold", "leafing.conservative", "leafing.bold","USDA", "admat", "incf","excf"  )
 name_vec=c("G_O" ,"G_C" ,"G_B", "L_C", "L_B","USDA", "A","I", "E" )
 
 RFBS_dir_names_sort=sort(RFBS_dir_names)
@@ -283,8 +213,6 @@ RFBS_legend_names = match_string_elements_to_string_vec(string_vec    = RFBS_dir
 RFBS_legend_names <- unlist(RFBS_legend_names)
 
 new_RFBS_runs_df=cbind(RFBS_legend_names[9:length(RFBS_legend_names)], RFBS_dir_names_sort[9:length(RFBS_dir_names_sort)])
-
-new_RFBS_runs_df=cbind(RFBS_legend_names, RFBS_dir_names_sort)
 
 #new_RFBS_runs_df=cbind(RFBS_legend_names, RFBS_dir_names_sort)
 

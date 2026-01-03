@@ -60,7 +60,7 @@ include(pwd() *"/src/Tree_Util_fns.jl")
 include(pwd() *"/src/rf_sim_fns.jl")
 include(pwd() *"/src/rf_rate_clado_mcmc_fns.jl")
 include(pwd() *"/src/post_pred_fns.jl")
-include(pwd() *"/scripts/scratch_ws/RJ_update_mcmc_ws.jl")
+#include(pwd() *"/src/RJ_update_mcmc.jl")
 
 ######set run arguements######################
 

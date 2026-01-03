@@ -1016,7 +1016,7 @@ library(phylobase) #to get node coords
 library(plotrix)
 library(vioplot)
 
-#setwd("/Volumes/michael.landis/Active/RFBS_RIS")
+setwd("/Volumes/michael.landis/Active/RFBS_RIS")
 
 workdir=getwd()
 
@@ -1049,37 +1049,15 @@ dir_names=c(old_RFBS_dir_names, new_RFBS_dir_names)
 
 dir_names=  list.files() [(grep("Bvib_3nB_Exp0p5_3000000",list.files()  )[grep("Bvib_3nB_Exp0p5_3000000",list.files()  ) %in% grep("Foss",list.files()  )])]
 
-dir_names = c(  "/Volumes/michael.landis/Active/Sean/RFBS/outfiles/emp/viburnum/resub/Bvib_3nB_Exp0p5_3000000_Foss_admat_incf_bold_excf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-                #"Bvib_3nB_Exp0p5_3000000_Foss_admat_incf_bold_excf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-                "/Volumes/michael.landis/Active/Sean/RFBS/outfiles/emp/viburnum/resub/Bvib_3nB_Exp0p5_3000000_Foss_admat_incf_cons_excf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-                #"Bvib_3nB_Exp0p5_3000000_Foss_admat_incf_cons_excf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-                "/Volumes/michael.landis/Active/Sean/RFBS/outfiles/emp/viburnum/resub/Bvib_3nB_Exp0p5_3000000_Foss_noincf_cons_noexcf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss"
-                #"Bvib_3nB_Exp0p5_3000000_Foss_noincf_cons_noexcf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa"
-                
-                
-)
-
-
-dir_names = c(  #"Bvib_3nB_Exp0p5_3000000_Foss_admat_incf_bold_excf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-                "/Volumes/michael.landis/Active/Sean/RFBS/outfiles/emp/viburnum/resub/Bvib_3nB_Exp0p5_3000000_Foss_admat_incf_bold_excf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-                #"Bvib_3nB_Exp0p5_3000000_Foss_admat_incf_cons_excf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-                "/Volumes/michael.landis/Active/Sean/RFBS/outfiles/emp/viburnum/resub/Bvib_3nB_Exp0p5_3000000_Foss_admat_incf_cons_excf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
-                #"Bvib_3nB_Exp0p5_3000000_Foss_noincf_cons_noexcf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
-                "/Volumes/michael.landis/Active/Sean/RFBS/outfiles/emp/viburnum/resub/Bvib_3nB_Exp0p5_3000000_Foss_noincf_cons_noexcf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa"
-                
-                
-)
-
-
 
 burnin=0.5
-RFBS_states_space= read.table("/Volumes/michael.landis/Active/Sean/RFBS/data/sim/rf_states.txt")
-DEC_states_space = read.table("/Volumes/michael.landis/Active/Sean/RFBS/data/sim/DEC_states.txt")
+RFBS_states_space= read.table("rf_states.txt")
+DEC_states_space=read.table("DEC_states.txt")
 
-tree=read.tree("/Volumes/michael.landis/Active/Sean/RFBS/data/emp/viburnum_data_files/viburnum_sorted.tre")
+tree=read.tree("viburnum_data_files/viburnum_sorted.tre")
 
 
-states_mat=read.table("/Volumes/michael.landis/Active/Sean/RFBS/data/sim/rf_states.txt")
+states_mat=read.table(paste("rf_states.txt", sep="/"))
 #states_mat=read.table(paste("DEC_states.txt", sep="/"))
 
 
@@ -1087,7 +1065,6 @@ states_mat=read.table("/Volumes/michael.landis/Active/Sean/RFBS/data/sim/rf_stat
 affs_list=list()
 length(dir_names)
 dir_inds=c(14,28, 29, 42, 57, 71, 85, 99, 113 )
-dir_inds = 1:3
 
 for(d in dir_inds){
   print(d)
@@ -1130,12 +1107,11 @@ clade_labels=make_vib_clade_mtx(tree)
   dev.off()
 }
 
-plot_names = c("bold", "conser", "none")
 
 for (d in dir_inds){
   print(d)
     
-  plot_name=paste("~/Projects/RFBS-main/outfiles/emp/viburnum/resub_figs/RJ_", plot_names[[d]],"_anc_aff.pdf", sep="")
+  plot_name=paste("rf_sim_plots/", dir_names[[d]],"_anc_aff.pdf", sep="")
   
   plotRFBSancaff(tree, states_mat,affs_list[[d]], plot_name,clade_labels, dims=c(80,150), plot)
 }

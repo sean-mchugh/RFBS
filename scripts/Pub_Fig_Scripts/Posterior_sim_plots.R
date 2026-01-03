@@ -103,158 +103,156 @@ t_col <- function(color, percent = 50, name = NULL) {
   invisible(t.col)
 }
 
+dir_name="BSim_500t_3nB_3maxr_LN_0.1_1.0_300000_2g_1g_1l_unce_rf_gl_ds"
+dir_name="BSim_500t_3nB_3maxr_LN_0.1_1.0_1000000_2g_1g_1l_unce_rf_gl_ds"
+#dir_name="BSim_500t_3nB_3maxr_LN_0.1_1.0_500000_2g_1g_1l_unce_rf_gl_ds"
+dir_name="BSim_500t_3nB_3maxr_LN_0.1_1.0_900000_2g_1g_1l_unce_rf_gl_ds"
 
-###showing all of these directory paths for posterity....this project took awhile
+dir_name="BSim_300t_3nB_3maxr_LN_0.1_1.0_200000_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds"
+dir_name="BSim_300t_3nB_3maxr_LN_0.1_1.0_200000_DEC_eco_clado_Rtre_2g_2l_unce_gl"
+dir_name="BSim_300t_3nB_3maxr_LN_0.1_1.0_200000_eco_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds"
+dir_name="BSim_300t_3nB_3maxr_LN_0.1_1.0_500000_eco_clado_Rtre_2g_1g_1l_unce_rf_gl_ds"
+#setwd(dir_name)
+dir_name="BSim_300t_3nB_3maxr_LN_0.1_1.0_200000_eco_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds/"
 
-#dir_name="BSim_500t_3nB_3maxr_LN_0.1_1.0_300000_2g_1g_1l_unce_rf_gl_ds"
-#dir_name="BSim_500t_3nB_3maxr_LN_0.1_1.0_1000000_2g_1g_1l_unce_rf_gl_ds"
-##dir_name="BSim_500t_3nB_3maxr_LN_0.1_1.0_500000_2g_1g_1l_unce_rf_gl_ds"
-#dir_name="BSim_500t_3nB_3maxr_LN_0.1_1.0_900000_2g_1g_1l_unce_rf_gl_ds"
-#
-#dir_name="BSim_300t_3nB_3maxr_LN_0.1_1.0_200000_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds"
-#dir_name="BSim_300t_3nB_3maxr_LN_0.1_1.0_200000_DEC_eco_clado_Rtre_2g_2l_unce_gl"
-#dir_name="BSim_300t_3nB_3maxr_LN_0.1_1.0_200000_eco_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds"
-#dir_name="BSim_300t_3nB_3maxr_LN_0.1_1.0_500000_eco_clado_Rtre_2g_1g_1l_unce_rf_gl_ds"
-##setwd(dir_name)
-#dir_name="BSim_300t_3nB_3maxr_LN_0.1_1.0_200000_eco_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds/"
-#
-#dir_name="BSim_300t_3nB_3maxr_LN_0.1_1.0_200000_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds"
-#
-#
-#dir_name="BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_3000000_eco_allo_clado_2g_1g_1l_rf_gl_ds"
-#
-#dir_name="BSim_200t_3nB_3maxr_LN_1_1.0_200000_eco_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds"
-#
-#dir_name="BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_3000000_eco_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds"
-#
-#dir_name="BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_2g_1g_1l_unce_rf_gl_ds"
-#
-#dir_name="BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds"
-#
-#dir_name="BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_1000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds"
-#
-#dir_name="BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_1000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds"
-#
-#dir_name="BSim_500t_3nB_3maxr_LN_0.1_1.0_1000000_2g_1g_1l_unce_rf_gl_ds"
-#
-#
-#dir_name="BSim_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds"
-#dir_name="BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds"
-#dir_name="BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds"
-#
-#
-#dir_name="BSim_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds"
-#
-#dir_names=c("BSim_300t_3nB_3maxr_LN_0.1_1.0_300000_DEC_eco_clado_Rtre_2g_2l_gl",
-#            "BSim_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds",
-#            "BSim_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds",
-#            "BSim_300t_3nB_LN_0.1_1.0_3000000_eco_allo_clado_Rtre_2g_1g_1l_unce[0.95][1.0]_rf_gl_ds",
-#            "BSim_300t_4nB_4maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds",
-#            "BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_2g_1g_1l_unce_rf_gl_ds",
-#            "BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds",
-#            "BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds",
-#            "BSim_TS_300t_3nB_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[1.0][0.0]_rf_gl_ds")
-#
-#dir_names=c("BSim_TS_300t_3nB_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds",
-#            "BSim_TS_300t_3nB_LN_0.1_1.0_100000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds",
-#            "BSim_TS_comp300t_3nB_3maxr_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[0.5][0.0]_rf_gl_ds",
-#            "BSim_TS_comp300t_3nB_3maxr_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[0.5][0.5]_rf_gl_ds",
-#            "BSim_TS_comp300t_3nB_3maxr_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[0.5][1.0]_rf_gl_ds",
-#            "BSim_TS_comp300t_3nB_3maxr_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[1.0][0.0]_rf_gl_ds")
-#
-#
-#dir_names=c("BSim_TS_comp300t_3nB_3maxr_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[1.0][0.5]_rf_gl_ds",
-#            "BSim_TS_300t_3nB_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds",
-#            "BSim_TS_300t_3nB_LN_0.1_1.0_100000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds",
-#            "BSim_TS_comp300t_3nB_3maxr_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[0.5][0.0]_rf_gl_ds",
-#            "BSim_TS_comp300t_3nB_3maxr_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[0.5][0.5]_rf_gl_ds",
-#            "BSim_TS_comp300t_3nB_3maxr_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[0.5][1.0]_rf_gl_ds",
-#            "BSim_TS_comp300t_3nB_3maxr_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[1.0][0.0]_rf_gl_ds")
-#
-#
-#dir_names=c(            "Bsim_0103_runs/BSim_TS_300t_3nB_LN_0.1_1.0iter_300000tp_1.5_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.5]_rf_gl_ds",
-#                        "Bsim_0103_runs/BSim_TS_300t_3nB_LN_0.1_1.0iter_300000tp_1.5_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][1.0]_rf_gl_ds",
-#                        "Bsim_0103_runs/BSim_TS_300t_3nB_LN_0.1_1.0iter_300000tp_1.5_eco_allo_clado_Rtre_2g_1g_1l_unce[1.0][0.5]_rf_gl_ds"
-#)
-#
-#dir_names=c("runsBsim_0103/BSim_300t_3nB_LN_0.1_1.0iter_500000tp_1.5_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.5]_rf_gl_ds",
-#            "runsBsim_0103/BSim_300t_3nB_LN_0.1_1.0iter_500000tp_1.5_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][1.0]_rf_gl_ds",
-#            "runsBsim_0103/BSim_300t_3nB_LN_0.1_1.0iter_500000tp_1.5_eco_allo_clado_Rtre_2g_1g_1l_unce[1.0][0.5]_rf_gl_ds",
-#            "runsBsim_0103/BSim_300t_3nB_LN_0.1_1.0iter_500000tp_1.5_eco_allo_clado_Rtre_2g_1g_1l_unce[1.0][1.0]_rf_gl_ds")
-#dir_names=c("BSim_150t_3nB_LN_0.1_1.0iter_1000000tp_1.5_eco_allo_clado_2g_1g_1l_dr_unce[0.98][1.0]_rf_gl_ds",
-#            "BSim_150t_3nB_LN_0.1_1.0iter_1000000tp_1.5_eco_allo_clado_2g_1g_1l_dr_unce[0.98][0.8]_rf_gl_ds",
-#            'BSim_150t_3nB_LN_0.1_1.0iter_1000000tp_1.5_eco_allo_clado_2g_1g_1l_dr_unce[0.98][0.333]_rf_gl_ds',    
-#            'BSim_150t_3nB_LN_0.1_1.0iter_1000000tp_1.5_eco_allo_clado_2g_1g_1l_dr_unce[0.98][0.666]_rf_gl_ds'    
-#)
-#
-#
-#
-#dir_names=c("Bvib_3nB_LN_0.1_1.0_1000000_admat_forbf_eco_allo_clado_2g_1g_1l_rf_gl_ds",
-#            "Bvib_3nB_LN_0.1_1.0_1000000_DEC_eco_clado_2g_2l_gl",
-#            "Bvib_3nB_LN_0.1_1.0_1000000_eco_allo_clado_2g_1g_1l_rf_gl_ds",
-#            "Bvib_3nB_LN_0.1_1.0_1000000_forbf_eco_allo_clado_2g_1g_1l_rf_gl_ds")
-#
-#{
-#  
-#  
-#  dir_names=c(  
-#    "BSim_500t_3nB_LN_0.1_1.0iter_500000_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.25][0.33]_rf_gl_ds",  
-#    "BSim_500t_3nB_LN_0.1_1.0iter_500000_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.25][0.66]_rf_gl_ds",
-#    
-#    "BSim_500t_3nB_LN_0.1_1.0iter_500000_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.5][0.33]_rf_gl_ds",   
-#    #"BSim_500t_3nB_LN_0.1_1.0iter_500000_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][1.0][0.33]_rf_gl_ds",
-#    "BSim_500t_3nB_LN_0.1_1.0iter_500000_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.5][0.66]_rf_gl_ds",
-#    #"BSim_500t_3nB_LN_0.1_1.0iter_500000_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][1.0][0.66]_rf_gl_ds",
-#    "BSim_500t_3nB_LN_0.1_1.0iter_500000_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][1.0][1.0]_rf_gl_ds"
-#  )
-#  
-#  
-#  
-#  dir_names=c("BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_300000_clado_Rtre_2g_1g_1l_dr_gl",
-#              "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_300000_clado_Rtre_2g_1g_1l_dr_rf",
-#              "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_300000_clado_Rtre_2g_1g_1l_dr_rf_ds",
-#              "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_300000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds")
-#  
-#  dir_names=c("BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_500000_clado_Rtre_1g_1l_dr_gl",
-#              "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_500000_clado_Rtre_1g_1l_dr_rf",
-#              "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_500000_clado_Rtre_1g_1l_dr_rf_gl",
-#             # "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr",
-#              "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr_gl",
-#              "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr_rf",
-#              "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr_rf_ds",
-#              "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds")
-#  
-#  
-#  dir_names=c("BSim_RFBS_DEC_comp150t_3nB_LN_0_0p5iter_500000_clado_Rtre_1g_1l_dr_gl",
-#              #"BSim_RFBS_DEC_comp150t_3nB_LN_0_0p5iter_500000_clado_Rtre_1g_1l_dr_rf",
-#              "BSim_RFBS_DEC_comp150t_3nB_LN_0_0p5iter_500000_clado_Rtre_1g_1l_dr_rf_gl",
-#              "BSim_RFBS_DEC_comp150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr",
-#              "BSim_RFBS_DEC_comp150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr_gl",
-#              "BSim_RFBS_DEC_comp150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr_rf",
-#              "BSim_RFBS_DEC_comp150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr_rf_ds",
-#              "BSim_RFBS_DEC_comp150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds")
-#  
-#  dir_names=
-#    c("BSim_RFBS_DEC_comp50t_3nB_Exp0p5iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-#      "BSim_RFBS_DEC_comp50t_3nB_Exp1p0iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-#      "BSim_RFBS_DEC_comp50t_3nB_Exp5p0iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-#      "BSim_RFBS_DEC_comp150t_3nB_Exp0p5iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-#      "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-#      "BSim_RFBS_DEC_comp150t_3nB_Exp5p0iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-#      "BSim_RFBS_DEC_comp500t_3nB_Exp0p5iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-#      "BSim_RFBS_DEC_comp500t_3nB_Exp1p0iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-#      "BSim_RFBS_DEC_comp500t_3nB_Exp5p0iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds")  
+dir_name="BSim_300t_3nB_3maxr_LN_0.1_1.0_200000_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds"
+
+
+dir_name="BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_3000000_eco_allo_clado_2g_1g_1l_rf_gl_ds"
+
+dir_name="BSim_200t_3nB_3maxr_LN_1_1.0_200000_eco_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds"
+
+dir_name="BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_3000000_eco_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds"
+
+dir_name="BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_2g_1g_1l_unce_rf_gl_ds"
+
+dir_name="BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds"
+
+dir_name="BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_1000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds"
+
+dir_name="BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_1000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds"
+
+dir_name="BSim_500t_3nB_3maxr_LN_0.1_1.0_1000000_2g_1g_1l_unce_rf_gl_ds"
+
+
+dir_name="BSim_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds"
+dir_name="BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds"
+dir_name="BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds"
+
+
+dir_name="BSim_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds"
+
+dir_names=c("BSim_300t_3nB_3maxr_LN_0.1_1.0_300000_DEC_eco_clado_Rtre_2g_2l_gl",
+            "BSim_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds",
+            "BSim_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds",
+            "BSim_300t_3nB_LN_0.1_1.0_3000000_eco_allo_clado_Rtre_2g_1g_1l_unce[0.95][1.0]_rf_gl_ds",
+            "BSim_300t_4nB_4maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds",
+            "BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_2g_1g_1l_unce_rf_gl_ds",
+            "BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds",
+            "BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds",
+            "BSim_TS_300t_3nB_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[1.0][0.0]_rf_gl_ds")
+
+dir_names=c("BSim_TS_300t_3nB_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds",
+            "BSim_TS_300t_3nB_LN_0.1_1.0_100000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds",
+            "BSim_TS_comp300t_3nB_3maxr_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[0.5][0.0]_rf_gl_ds",
+            "BSim_TS_comp300t_3nB_3maxr_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[0.5][0.5]_rf_gl_ds",
+            "BSim_TS_comp300t_3nB_3maxr_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[0.5][1.0]_rf_gl_ds",
+            "BSim_TS_comp300t_3nB_3maxr_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[1.0][0.0]_rf_gl_ds")
+
+
+dir_names=c("BSim_TS_comp300t_3nB_3maxr_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[1.0][0.5]_rf_gl_ds",
+            "BSim_TS_300t_3nB_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds",
+            "BSim_TS_300t_3nB_LN_0.1_1.0_100000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds",
+            "BSim_TS_comp300t_3nB_3maxr_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[0.5][0.0]_rf_gl_ds",
+            "BSim_TS_comp300t_3nB_3maxr_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[0.5][0.5]_rf_gl_ds",
+            "BSim_TS_comp300t_3nB_3maxr_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[0.5][1.0]_rf_gl_ds",
+            "BSim_TS_comp300t_3nB_3maxr_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[1.0][0.0]_rf_gl_ds")
+
+
+dir_names=c(            "Bsim_0103_runs/BSim_TS_300t_3nB_LN_0.1_1.0iter_300000tp_1.5_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.5]_rf_gl_ds",
+                        "Bsim_0103_runs/BSim_TS_300t_3nB_LN_0.1_1.0iter_300000tp_1.5_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][1.0]_rf_gl_ds",
+                        "Bsim_0103_runs/BSim_TS_300t_3nB_LN_0.1_1.0iter_300000tp_1.5_eco_allo_clado_Rtre_2g_1g_1l_unce[1.0][0.5]_rf_gl_ds"
+)
+
+dir_names=c("runsBsim_0103/BSim_300t_3nB_LN_0.1_1.0iter_500000tp_1.5_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.5]_rf_gl_ds",
+            "runsBsim_0103/BSim_300t_3nB_LN_0.1_1.0iter_500000tp_1.5_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][1.0]_rf_gl_ds",
+            "runsBsim_0103/BSim_300t_3nB_LN_0.1_1.0iter_500000tp_1.5_eco_allo_clado_Rtre_2g_1g_1l_unce[1.0][0.5]_rf_gl_ds",
+            "runsBsim_0103/BSim_300t_3nB_LN_0.1_1.0iter_500000tp_1.5_eco_allo_clado_Rtre_2g_1g_1l_unce[1.0][1.0]_rf_gl_ds")
+dir_names=c("BSim_150t_3nB_LN_0.1_1.0iter_1000000tp_1.5_eco_allo_clado_2g_1g_1l_dr_unce[0.98][1.0]_rf_gl_ds",
+            "BSim_150t_3nB_LN_0.1_1.0iter_1000000tp_1.5_eco_allo_clado_2g_1g_1l_dr_unce[0.98][0.8]_rf_gl_ds",
+            'BSim_150t_3nB_LN_0.1_1.0iter_1000000tp_1.5_eco_allo_clado_2g_1g_1l_dr_unce[0.98][0.333]_rf_gl_ds',    
+            'BSim_150t_3nB_LN_0.1_1.0iter_1000000tp_1.5_eco_allo_clado_2g_1g_1l_dr_unce[0.98][0.666]_rf_gl_ds'    
+)
+
+
+
+dir_names=c("Bvib_3nB_LN_0.1_1.0_1000000_admat_forbf_eco_allo_clado_2g_1g_1l_rf_gl_ds",
+            "Bvib_3nB_LN_0.1_1.0_1000000_DEC_eco_clado_2g_2l_gl",
+            "Bvib_3nB_LN_0.1_1.0_1000000_eco_allo_clado_2g_1g_1l_rf_gl_ds",
+            "Bvib_3nB_LN_0.1_1.0_1000000_forbf_eco_allo_clado_2g_1g_1l_rf_gl_ds")
+
+{
+  
+  
+  dir_names=c(  
+    "BSim_500t_3nB_LN_0.1_1.0iter_500000_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.25][0.33]_rf_gl_ds",  
+    "BSim_500t_3nB_LN_0.1_1.0iter_500000_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.25][0.66]_rf_gl_ds",
+    
+    "BSim_500t_3nB_LN_0.1_1.0iter_500000_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.5][0.33]_rf_gl_ds",   
+    #"BSim_500t_3nB_LN_0.1_1.0iter_500000_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][1.0][0.33]_rf_gl_ds",
+    "BSim_500t_3nB_LN_0.1_1.0iter_500000_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.5][0.66]_rf_gl_ds",
+    #"BSim_500t_3nB_LN_0.1_1.0iter_500000_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][1.0][0.66]_rf_gl_ds",
+    "BSim_500t_3nB_LN_0.1_1.0iter_500000_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][1.0][1.0]_rf_gl_ds"
+  )
+  
+  
+  
+  dir_names=c("BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_300000_clado_Rtre_2g_1g_1l_dr_gl",
+              "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_300000_clado_Rtre_2g_1g_1l_dr_rf",
+              "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_300000_clado_Rtre_2g_1g_1l_dr_rf_ds",
+              "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_300000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds")
+  
+  dir_names=c("BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_500000_clado_Rtre_1g_1l_dr_gl",
+              "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_500000_clado_Rtre_1g_1l_dr_rf",
+              "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_500000_clado_Rtre_1g_1l_dr_rf_gl",
+             # "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr",
+              "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr_gl",
+              "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr_rf",
+              "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr_rf_ds",
+              "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds")
+  
+  
+  dir_names=c("BSim_RFBS_DEC_comp150t_3nB_LN_0_0p5iter_500000_clado_Rtre_1g_1l_dr_gl",
+              #"BSim_RFBS_DEC_comp150t_3nB_LN_0_0p5iter_500000_clado_Rtre_1g_1l_dr_rf",
+              "BSim_RFBS_DEC_comp150t_3nB_LN_0_0p5iter_500000_clado_Rtre_1g_1l_dr_rf_gl",
+              "BSim_RFBS_DEC_comp150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr",
+              "BSim_RFBS_DEC_comp150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr_gl",
+              "BSim_RFBS_DEC_comp150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr_rf",
+              "BSim_RFBS_DEC_comp150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr_rf_ds",
+              "BSim_RFBS_DEC_comp150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds")
   
   dir_names=
-    c(       "/Volumes/michael.landis/Active/Sean/RFBS/outfiles/sim/resub/coverage/BSim_RFBS_DEC_comp50t_3nB_Exp0p5iter_1000000_Ncladooff_0_Nrateoff_0_f2n_clado_Rtre_2g_2l_1g_1l_2sw_dr_rf_gl_ds/",
+    c("BSim_RFBS_DEC_comp50t_3nB_Exp0p5iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
+      "BSim_RFBS_DEC_comp50t_3nB_Exp1p0iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
+      "BSim_RFBS_DEC_comp50t_3nB_Exp5p0iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
+      "BSim_RFBS_DEC_comp150t_3nB_Exp0p5iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
+      "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
+      "BSim_RFBS_DEC_comp150t_3nB_Exp5p0iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
+      "BSim_RFBS_DEC_comp500t_3nB_Exp0p5iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
+      "BSim_RFBS_DEC_comp500t_3nB_Exp1p0iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
+      "BSim_RFBS_DEC_comp500t_3nB_Exp5p0iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds")  
+  
+  dir_names=
+    c(       "BSim_RFBS_DEC_comp50t_3nB_Exp0p5iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
              #"BSim_RFBS_DEC_comp50t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-             "/Volumes/michael.landis/Active/Sean/RFBS/outfiles/sim/resub/coverage/BSim_RFBS_DEC_comp50t_3nB_Exp2p0iter_1000000_Ncladooff_0_Nrateoff_0_f2n_clado_Rtre_2g_2l_1g_1l_2sw_dr_rf_gl_ds/",
-              #"BSim_RFBS_DEC_comp150t_3nB_Exp0p5iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-              #"BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-              #"BSim_RFBS_DEC_comp150t_3nB_Exp2p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-              "/Volumes/michael.landis/Active/Sean/RFBS/outfiles/sim/resub/coverage/BSim_RFBS_DEC_comp500t_3nB_Exp0p5iter_1000000_Ncladooff_0_Nrateoff_0_f2n_clado_Rtre_2g_2l_1g_1l_2sw_dr_rf_gl_ds/",
-              #"BSim_RFBS_DEC_comp500t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-              "/Volumes/michael.landis/Active/Sean/RFBS/outfiles/sim/resub/coverage/BSim_RFBS_DEC_comp500t_3nB_Exp2p0iter_1000000_Ncladooff_0_Nrateoff_0_f2n_clado_Rtre_2g_2l_1g_1l_2sw_dr_rf_gl_ds/")
+             "BSim_RFBS_DEC_comp50t_3nB_Exp2p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
+  
+      #"BSim_RFBS_DEC_comp150t_3nB_Exp0p5iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
+      #"BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
+      #"BSim_RFBS_DEC_comp150t_3nB_Exp2p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
+      "BSim_RFBS_DEC_comp500t_3nB_Exp0p5iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
+      #"BSim_RFBS_DEC_comp500t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
+      "BSim_RFBS_DEC_comp500t_3nB_Exp2p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds")
 
   dir_labels=c("50 Tips / 0.5 rate prior",
                #"50 Tips / 1.0 rate prior",
@@ -342,7 +340,7 @@ t_col <- function(color, percent = 50, name = NULL) {
   
   prior_dir="BSim_RFBS_DEC_compPO_50t_3nB_Exp0p5iter_500000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds"
   #if running files from HPC
-  setwd("/Volumes/michael.landis/Active/Sean/RFBS/")
+  setwd("/Volumes/michael.landis/Active/RFBS_RIS/")
   
   workdir=getwd()
   
@@ -377,7 +375,7 @@ t_col <- function(color, percent = 50, name = NULL) {
   
 }
 
-
+}
 
 
 
@@ -503,7 +501,6 @@ for (dir in 1:length(dir_names)){
           
           #5:(4+) without clado par, 6:(5+)
           chain_ind_vec=6:(5+npars)
-          chain_ind_vec=c(6:12, 20:22)
           
           chain_list=colnames(test[[1]])[chain_ind_vec]
           
@@ -581,27 +578,12 @@ for (dir in 1:length(dir_names)){
      ESS_rows=1:5
      
      
-     par_names=c(
-       expression(italic(l)[1 %->% 0]), 
-       expression(italic(l)[2 %->% 0]), 
-       expression(italic(g)[0 %->% 1]),
-       expression(italic(s)[2]),
-       expression(italic(l)[2 %->% 1]),
-       expression(italic(g)[0 %->% 2]),
-       expression(italic(g)[1 %->% 2]),
-       expression(italic(b)[i]),
-       expression(italic(w)[i]),
-       expression(italic(e)[i])
-     )
-     
-     ESS_rows=1:6
-     
 
      
       
-     pdf(paste("~/Projects/RFBS-Main/outfiles/sim_plots/resub/coverage/", "95p_3_150tip.pdf", sep=""), width = 25, height = 20)
+     pdf(paste(workdir,"/", "95p_3_150tip.pdf", sep=""), width = 20, height = 15)
      #par(mfrow=c(2,2))
-     layout_matrix= createLayoutMatrix(Nrow = 2, Ncol = 5, blockRows = 2, blockCols = 2, gridFillOrder  = "byrow", blockFillOrder = "byrow")     
+     layout_matrix= createLayoutMatrix(Nrow = 2, Ncol = 4, blockRows = 2, blockCols = 2, gridFillOrder  = "byrow", blockFillOrder = "byrow")     
      layout(layout_matrix)
      
     # par(oma=c(0,0,3,0));  
@@ -651,7 +633,7 @@ for (dir in 1:length(dir_names)){
         
         for (i in 1:ncol(post_median_total)){
           
-          if(i>7){
+          if(i>5){
             
             max_val= 1
             
@@ -663,9 +645,7 @@ for (dir in 1:length(dir_names)){
             
           }else{
             
-            #max_val=max(unlist(post_median_total))
-            max_val= max(unlist(lapply(post_median_total_list[dir], function(par_it) max(unlist(par_it[-1,])))))
-            
+            max_val=max(unlist(post_median_total))
             
             max=as.integer(max_val+max_val*0.1)
             
@@ -701,11 +681,7 @@ for (dir in 1:length(dir_names)){
           }
           points(sim_pars_total[good_rows,i], post_median_total[good_rows,i])
           
-          # --- NEW: LOESS SMOOTHING LINE ---
-          lo <- loess(post_median_total[good_rows,i] ~ sim_pars_total[good_rows,i])
-          xs <- seq(min(sim_pars_total[good_rows,i]), max(sim_pars_total[good_rows,i]), length.out = 200)
-          lines(xs, predict(lo, xs), col="darkorange", lwd=3)
-          # ---------------------------------
+          
           
           arrows(sim_pars_total[good_rows,i], lower_HPD[good_rows,i], sim_pars_total[good_rows,i], upper_HPD[good_rows,i], length=0.01, angle=90, code=3,col =HPD_colors[isin_HPD[good_rows,i]+1] )
           #(ESS[,6]>200)
@@ -732,4 +708,74 @@ dev.off()
 
 }
 
+#post_median_total/
 
+
+#######
+
+ESS_total=rbind(ESS_total,ESS)
+
+HPD_total=rbind(HPD_total,HPD)
+isin_HPD_total=rbind(isin_HPD_total,isin_HPD)
+post_mean_total=rbind(post_mean_total,post_mean)
+post_median_total=rbind(post_median_total,post_median)
+sim_pars_total=rbind(sim_pars_total,sim_pars)
+colSums(isin_HPD_total)/nrow(isin_HPD_total)
+
+
+plot(pbtree(n = 3), )
+
+
+
+
+
+
+#if((i-1)%%ncol_plots==0){
+#  
+#  if((i)>(nrow_plots*ncol_plots-ncol_plots)){
+#    
+#    plot(c(0, max), c(0, maxy), main=par_names[[i]],type = "n",xlab = "True Simulating Pars", ylab="Posterior Median", cex.main=2.5)
+#    
+#  }else{
+#    
+#    plot(c(0, max), c(0, maxy), main=par_names[[i]],type = "n", xlab="", ylab="Posterior Median",cex.main=2.5)
+#    
+#  }
+#  
+#}else{
+#  
+#  if(i>(nrow_plots*ncol_plots-ncol_plots)){
+#    
+#    plot(c(0, max), c(0, maxy), main=par_names[[i]],type = "n",xlab = "True Simulating Pars", ylab="", cex.main=2.5)
+#    
+#  }else{
+#    
+#    plot(c(0, max), c(0, maxy), main=par_names[[i]],type = "n", xlab = "", ylab="", cex.main=2.5)
+#    
+#  }
+#  
+
+
+#}
+
+####messed up file naming when adding clado par, use as below
+#
+#file_list=list.files(dir_name)
+#prior_file_list=list.files(prior_dir)
+#
+#run_list=file_list[grep("_log.txt",unlist(file_list),fixed=FALSE)]
+#
+#prior_run=prior_file_list[grep("__log.txt",unlist(prior_file_list),fixed=FALSE)]
+#prior_test=read.table(paste(prior_dir,prior_run, sep="/"), header = T)
+#
+#
+#sim_pars_string_ = gsub("_log.txt*","",unlist(run_list),fixed=FALSE)
+#sim_pars_strings = gsub("\t","",unlist(sim_pars_string_),fixed=FALSE)
+#
+#sim_pars_strings_unique=unique(sim_pars_strings)
+#
+#
+#sim_pars=as.numeric(unlist(str_split(sim_pars_strings_unique, "_")))
+#
+#sim_pars=do.call(rbind,lapply(sim_pars_strings_unique, function(run)  as.numeric(unlist(str_split(run, "_")))))
+#

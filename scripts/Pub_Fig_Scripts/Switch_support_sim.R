@@ -1,11 +1,13 @@
 
+library(DELTD)
+
 # Number of replicates
 n = 99
 
 # HPD coverage
 p = 0.5
 
-calc_HPD_ci(100, 0.5)
+#calc_HPD_ci(100, 0.95)
 
 calc_HPD_ci=function(n, p){
   # Mean, E[X]
@@ -27,6 +29,9 @@ calc_HPD_ci=function(n, p){
               "mean"=mu))
   
 }
+
+calc_HPD_ci(100, 0.95)
+
 
 {
   library(stringr)
@@ -99,167 +104,46 @@ calc_HPD_ci=function(n, p){
     ## Save the color
     invisible(t.col)
   }
-  
-  dir_name="BSim_500t_3nB_3maxr_LN_0.1_1.0_300000_2g_1g_1l_unce_rf_gl_ds"
-  dir_name="BSim_500t_3nB_3maxr_LN_0.1_1.0_1000000_2g_1g_1l_unce_rf_gl_ds"
-  #dir_name="BSim_500t_3nB_3maxr_LN_0.1_1.0_500000_2g_1g_1l_unce_rf_gl_ds"
-  dir_name="BSim_500t_3nB_3maxr_LN_0.1_1.0_900000_2g_1g_1l_unce_rf_gl_ds"
-  
-  dir_name="BSim_300t_3nB_3maxr_LN_0.1_1.0_200000_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds"
-  dir_name="BSim_300t_3nB_3maxr_LN_0.1_1.0_200000_DEC_eco_clado_Rtre_2g_2l_unce_gl"
-  dir_name="BSim_300t_3nB_3maxr_LN_0.1_1.0_200000_eco_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds"
-  dir_name="BSim_300t_3nB_3maxr_LN_0.1_1.0_500000_eco_clado_Rtre_2g_1g_1l_unce_rf_gl_ds"
-  #setwd(dir_name)
-  dir_name="BSim_300t_3nB_3maxr_LN_0.1_1.0_200000_eco_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds/"
-  
-  dir_name="BSim_300t_3nB_3maxr_LN_0.1_1.0_200000_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds"
-  
-  
-  dir_name="BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_3000000_eco_allo_clado_2g_1g_1l_rf_gl_ds"
-  
-  dir_name="BSim_200t_3nB_3maxr_LN_1_1.0_200000_eco_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds"
-  
-  dir_name="BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_3000000_eco_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds"
-  
-  dir_name="BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_2g_1g_1l_unce_rf_gl_ds"
-  
-  dir_name="BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds"
-  
-  dir_name="BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_1000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds"
-  
-  dir_name="BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_1000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds"
-  
-  dir_name="BSim_500t_3nB_3maxr_LN_0.1_1.0_1000000_2g_1g_1l_unce_rf_gl_ds"
-  
-  
-  dir_name="BSim_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds"
-  dir_name="BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds"
-  dir_name="BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds"
-  
-  
-  dir_name="BSim_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds"
-  
-  dir_names=c("BSim_300t_3nB_3maxr_LN_0.1_1.0_300000_DEC_eco_clado_Rtre_2g_2l_gl",
-              "BSim_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds",
-              "BSim_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds",
-              "BSim_300t_3nB_LN_0.1_1.0_3000000_eco_allo_clado_Rtre_2g_1g_1l_unce[0.95][1.0]_rf_gl_ds",
-              "BSim_300t_4nB_4maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds",
-              "BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_2g_1g_1l_unce_rf_gl_ds",
-              "BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds",
-              "BSim_TS_300t_3nB_3maxr_LN_0.1_1.0_300000_eco_allo_clado_Rtre_2g_1g_1l_unce_rf_gl_ds",
-              "BSim_TS_300t_3nB_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[1.0][0.0]_rf_gl_ds")
-  
-  dir_names=c("BSim_TS_300t_3nB_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds",
-              "BSim_TS_300t_3nB_LN_0.1_1.0_100000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds",
-              "BSim_TS_comp300t_3nB_3maxr_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[0.5][0.0]_rf_gl_ds",
-              "BSim_TS_comp300t_3nB_3maxr_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[0.5][0.5]_rf_gl_ds",
-              "BSim_TS_comp300t_3nB_3maxr_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[0.5][1.0]_rf_gl_ds",
-              "BSim_TS_comp300t_3nB_3maxr_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[1.0][0.0]_rf_gl_ds")
-  
-  
-  dir_names=c("BSim_TS_comp300t_3nB_3maxr_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[1.0][0.5]_rf_gl_ds",
-              "BSim_TS_300t_3nB_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds",
-              "BSim_TS_300t_3nB_LN_0.1_1.0_100000_eco_allo_clado_Rtre_2g_1g_1l_rf_gl_ds",
-              "BSim_TS_comp300t_3nB_3maxr_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[0.5][0.0]_rf_gl_ds",
-              "BSim_TS_comp300t_3nB_3maxr_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[0.5][0.5]_rf_gl_ds",
-              "BSim_TS_comp300t_3nB_3maxr_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[0.5][1.0]_rf_gl_ds",
-              "BSim_TS_comp300t_3nB_3maxr_LN_0.1_1.0_10000_eco_allo_clado_Rtre_2g_1g_1l_unce[1.0][0.0]_rf_gl_ds")
-  
-  
-  dir_names=c(            "Bsim_0103_runs/BSim_TS_300t_3nB_LN_0.1_1.0iter_300000tp_1.5_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.5]_rf_gl_ds",
-                          "Bsim_0103_runs/BSim_TS_300t_3nB_LN_0.1_1.0iter_300000tp_1.5_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][1.0]_rf_gl_ds",
-                          "Bsim_0103_runs/BSim_TS_300t_3nB_LN_0.1_1.0iter_300000tp_1.5_eco_allo_clado_Rtre_2g_1g_1l_unce[1.0][0.5]_rf_gl_ds"
-  )
-  
-  dir_names=c("runsBsim_0103/BSim_300t_3nB_LN_0.1_1.0iter_500000tp_1.5_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.5]_rf_gl_ds",
-              "runsBsim_0103/BSim_300t_3nB_LN_0.1_1.0iter_500000tp_1.5_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][1.0]_rf_gl_ds",
-              "runsBsim_0103/BSim_300t_3nB_LN_0.1_1.0iter_500000tp_1.5_eco_allo_clado_Rtre_2g_1g_1l_unce[1.0][0.5]_rf_gl_ds",
-              "runsBsim_0103/BSim_300t_3nB_LN_0.1_1.0iter_500000tp_1.5_eco_allo_clado_Rtre_2g_1g_1l_unce[1.0][1.0]_rf_gl_ds")
-  dir_names=c("BSim_150t_3nB_LN_0.1_1.0iter_1000000tp_1.5_eco_allo_clado_2g_1g_1l_dr_unce[0.98][1.0]_rf_gl_ds",
-              "BSim_150t_3nB_LN_0.1_1.0iter_1000000tp_1.5_eco_allo_clado_2g_1g_1l_dr_unce[0.98][0.8]_rf_gl_ds",
-              'BSim_150t_3nB_LN_0.1_1.0iter_1000000tp_1.5_eco_allo_clado_2g_1g_1l_dr_unce[0.98][0.333]_rf_gl_ds',    
-              'BSim_150t_3nB_LN_0.1_1.0iter_1000000tp_1.5_eco_allo_clado_2g_1g_1l_dr_unce[0.98][0.666]_rf_gl_ds'    
-  )
-  
-  
-  
-  dir_names=c("Bvib_3nB_LN_0.1_1.0_1000000_admat_forbf_eco_allo_clado_2g_1g_1l_rf_gl_ds",
-              "Bvib_3nB_LN_0.1_1.0_1000000_DEC_eco_clado_2g_2l_gl",
-              "Bvib_3nB_LN_0.1_1.0_1000000_eco_allo_clado_2g_1g_1l_rf_gl_ds",
-              "Bvib_3nB_LN_0.1_1.0_1000000_forbf_eco_allo_clado_2g_1g_1l_rf_gl_ds")
-  
-  {
-    
-    
-    dir_names=c(  
-      "BSim_500t_3nB_LN_0.1_1.0iter_500000_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.25][0.33]_rf_gl_ds",  
-      "BSim_500t_3nB_LN_0.1_1.0iter_500000_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.25][0.66]_rf_gl_ds",
-      
-      "BSim_500t_3nB_LN_0.1_1.0iter_500000_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.5][0.33]_rf_gl_ds",   
-      #"BSim_500t_3nB_LN_0.1_1.0iter_500000_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][1.0][0.33]_rf_gl_ds",
-      "BSim_500t_3nB_LN_0.1_1.0iter_500000_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.5][0.66]_rf_gl_ds",
-      #"BSim_500t_3nB_LN_0.1_1.0iter_500000_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][1.0][0.66]_rf_gl_ds",
-      "BSim_500t_3nB_LN_0.1_1.0iter_500000_eco_allo_clado_Rtre_2g_1g_1l_dr_unce[1.0][1.0][1.0]_rf_gl_ds"
-    )
-    
-    
-    
-    dir_names=c("BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_300000_clado_Rtre_2g_1g_1l_dr_gl",
-                "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_300000_clado_Rtre_2g_1g_1l_dr_rf",
-                "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_300000_clado_Rtre_2g_1g_1l_dr_rf_ds",
-                "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_300000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds")
-    
-    dir_names=c("BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_500000_clado_Rtre_1g_1l_dr_gl",
-                "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_500000_clado_Rtre_1g_1l_dr_rf",
-                "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_500000_clado_Rtre_1g_1l_dr_rf_gl",
-                # "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr",
-                "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr_gl",
-                "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr_rf",
-                "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr_rf_ds",
-                "BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds")
-    
-    
-    dir_names=c("BSim_RFBS_DEC_comp150t_3nB_LN_0_0p5iter_500000_clado_Rtre_1g_1l_dr_gl",
-                #"BSim_RFBS_DEC_comp150t_3nB_LN_0_0p5iter_500000_clado_Rtre_1g_1l_dr_rf",
-                "BSim_RFBS_DEC_comp150t_3nB_LN_0_0p5iter_500000_clado_Rtre_1g_1l_dr_rf_gl",
-                "BSim_RFBS_DEC_comp150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr",
-                "BSim_RFBS_DEC_comp150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr_gl",
-                "BSim_RFBS_DEC_comp150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr_rf",
-                "BSim_RFBS_DEC_comp150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr_rf_ds",
-                "BSim_RFBS_DEC_comp150t_3nB_LN_0_0p5iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds")
-    
+
     dir_names=
-      c("BSim_RFBS_DEC_comp50t_3nB_Exp0p5iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-        "BSim_RFBS_DEC_comp50t_3nB_Exp1p0iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-        "BSim_RFBS_DEC_comp50t_3nB_Exp5p0iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-        "BSim_RFBS_DEC_comp150t_3nB_Exp0p5iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-        "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-        "BSim_RFBS_DEC_comp150t_3nB_Exp5p0iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-        "BSim_RFBS_DEC_comp500t_3nB_Exp0p5iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-        "BSim_RFBS_DEC_comp500t_3nB_Exp1p0iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-        "BSim_RFBS_DEC_comp500t_3nB_Exp5p0iter_500000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds")  
+      c(        "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_5000000_Ncladooff_1_Nrateoff_1_f2n_clado_Rtre_2g_2l_1g_1l_dr_rf_gl_ds",
+                "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_5000000_Ncladooff_1_Nrateoff_1_f2n_clado_Rtre_2g_2l_1g_1l_dr_unce[1.0][0.33][0.25]_rf_gl_ds",
+                "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_5000000_Ncladooff_1_Nrateoff_1_f2n_clado_Rtre_2g_2l_1g_1l_dr_unce[1.0][0.33][0.75]_rf_gl_ds",
+                "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_5000000_Ncladooff_1_Nrateoff_1_f2n_clado_Rtre_2g_2l_1g_1l_dr_unce[1.0][0.66][0.25]_rf_gl_ds",
+                "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_5000000_Ncladooff_1_Nrateoff_1_f2n_clado_Rtre_2g_2l_1g_1l_dr_unce[1.0][0.66][0.75]_rf_gl_ds")
     
-    dir_names=
-      c(       "BSim_RFBS_DEC_comp50t_3nB_Exp0p5iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-               #"BSim_RFBS_DEC_comp50t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-               "BSim_RFBS_DEC_comp50t_3nB_Exp2p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-               
-               #"BSim_RFBS_DEC_comp150t_3nB_Exp0p5iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-               #"BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-               #"BSim_RFBS_DEC_comp150t_3nB_Exp2p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-               "BSim_RFBS_DEC_comp500t_3nB_Exp0p5iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-               #"BSim_RFBS_DEC_comp500t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-               "BSim_RFBS_DEC_comp500t_3nB_Exp2p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds")
+    #dir_names=
+    #c("BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_5000000_Ncladooff_0_Nrateoff_1_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds"
+    #,"BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_5000000_Ncladooff_0_Nrateoff_1_f2n_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.33][0.25]_rf_gl_ds"
+    #,"BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_5000000_Ncladooff_0_Nrateoff_1_f2n_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.33][0.75]_rf_gl_ds"
+    #,"BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_5000000_Ncladooff_0_Nrateoff_1_f2n_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.66][0.25]_rf_gl_ds"
+    #,"BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_5000000_Ncladooff_0_Nrateoff_1_f2n_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.66][0.75]_rf_gl_ds"
+    #)
     
-    dir_labels=c("50 Tips / 0.5 rate prior",
+    
+   dir_names = 
+     c(  "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_5000000_Ncladooff_0_Nrateoff_0_f2n_clado_Rtre_2g_2l_1g_1l_dr_rf_gl_ds" #,
+       #"BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_5000000_Ncladooff_0_Nrateoff_1_f2n_clado_Rtre_2g_2l_1g_1l_dr_unce[1.0][0.33][0.25]_rf_gl_ds",
+       #"BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_5000000_Ncladooff_0_Nrateoff_1_f2n_clado_Rtre_2g_2l_1g_1l_dr_unce[1.0][0.33][0.75]_rf_gl_ds",
+       #"BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_5000000_Ncladooff_0_Nrateoff_1_f2n_clado_Rtre_2g_2l_1g_1l_dr_unce[1.0][0.66][0.25]_rf_gl_ds",
+       #"BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_5000000_Ncladooff_0_Nrateoff_1_f2n_clado_Rtre_2g_2l_1g_1l_dr_unce[1.0][0.66][0.75]_rf_gl_ds"
+       )
+        
+
+   dir_names= c("BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_5000000_Ncladooff_0_Nrateoff_1_f2n_clado_Rtre_2g_2l_1g_1l_2sw_dr_rf_gl_ds")
+    dir_labels=c("Full data",
                  #"50 Tips / 1.0 rate prior",
-                 "50 Tips / 5.0 rate prior",
-                 #"150 Tips / 0.5 rate prior",
+                 "0.33 biomes / 0.25 tips",
+                 "0.33 biomes / 0.75 tips",
                  #"150 Tips / 1.0 rate prior",
                  #"150 Tips / 5.0 rate prior",
-                 "500 Tips / 0.5 rate prior",
-                 #"500 Tips / 1.0 rate prior",
-                 "500 Tips / 5.0 rate prior")
+                 "0.66 biomes / 0.25 tips",
+                 "0.66 biomes / 0.75 tips"
+)
+    
+dir_labels=c("Full data"
+)
+
     #dir_names=c("BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_5000_clado_Rtre_2g_1g_1l_dr")
     #dir_names=c("saved_BSim_runs/BSim_RFBS_DEC_compAbs150t_3nB_LN_0_0p5iter_300000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds")
     #                     "[1.0][0.25][0.66]",
@@ -300,32 +184,32 @@ calc_HPD_ci=function(n, p){
     #            "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_300000_clado_Rtre_2g_1g_1l_dr_rf_ds",
     #            "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_300000_clado_Rtre_2g_1g_1l_dr_rf_gl_ds")
     #
-    dir_names=c(   "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
-                   "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.33][0.25]_rf_gl_ds",
-                   #"BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.33][0.5]_rf_gl_ds",
-                   "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.33][0.75]_rf_gl_ds",
-                  # "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.33][1.0]_rf_gl_ds",
-                   "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.66][0.25]_rf_gl_ds",
-                  # "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.66][0.5]_rf_gl_ds",
-                   "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.66][0.75]_rf_gl_ds",
-                  # "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.66][1.0]_rf_gl_ds",
-                   "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_unce[1.0][1.0][1.0]_rf_gl_ds")
-         
-              
-       # dir_names=c("saved_BSim_runs/Draft_2/BSim_RFBS_DEC_compPO_50t_3nB_Exp0p5iter_500000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds")           
-                
-    dir_labels=c("no missing data",
-                  "-2 ambiguous states of a maximum of 3 in 25% tips",
-                  #"-2 ambiguous states of a maximum of 3 in 50% tips",
-                  "-2 ambiguous states of a maximum of 3 in 75% tips",
-                #  "-2 ambiguous states of a maximum of 3 in 100% tips",
-                  "-1 ambiguous state of a maximum of 3 in 25% tips",
-                  #"-1 ambiguous state of a maximum of 3 in 50% tips",
-                  "-1 ambiguous state of a maximum of 3 in 75% tips",
-                  #"-1 ambiguous state of a maximum of 3 in 100% tips",
-                 "all ambiguous states in 100% tips")
-    
-     
+    #dir_names=c(   "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds",
+    #               "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.33][0.25]_rf_gl_ds",
+    #               "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.33][0.5]_rf_gl_ds",
+    #               "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.33][0.75]_rf_gl_ds",
+    #               "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.33][1.0]_rf_gl_ds",
+    #               "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.66][0.25]_rf_gl_ds",
+    #               "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.66][0.5]_rf_gl_ds",
+    #               "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.66][0.75]_rf_gl_ds",
+    #               "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.66][1.0]_rf_gl_ds",
+    #               "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_unce[1.0][1.0][1.0]_rf_gl_ds")
+    #     
+    #          
+    #   # dir_names=c("saved_BSim_runs/Draft_2/BSim_RFBS_DEC_compPO_50t_3nB_Exp0p5iter_500000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds")           
+    #            
+    #dir_labels=c("no missing data",
+    #             "-2 ambiguous states in 25% tips",
+    #             "-2 ambiguous states in 50% tips",
+    #             "-2 ambiguous states in 75% tips",
+    #             "-2 ambiguous states in 100% tips",
+    #             "-1 ambiguous states in 25% tips",
+    #             "-1 ambiguous states in 50% tips",
+    #             "-1 ambiguous states in 75% tips",
+    #             "-1 ambiguous states in 100% tips",
+    #             "all ambiguous states in 100% tips")
+    #
+    # 
     
     # dir_ind=c(1:10)
     
@@ -337,7 +221,7 @@ calc_HPD_ci=function(n, p){
     
     prior_dir="BSim_RFBS_DEC_compPO_50t_3nB_Exp0p5iter_500000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds"
     #if running files from HPC
-    setwd("/Volumes/michael.landis/Active/RFBS_RIS/")
+    setwd("/Volumes/michael.landis/Active/Sean/RFBS/outfiles/sim")
     
     workdir=getwd()
     
@@ -372,7 +256,7 @@ calc_HPD_ci=function(n, p){
     
   }
   
-}
+
 
 
 
@@ -386,6 +270,10 @@ isin_HPD_list=list()
 chain_list_list=list()
 test_list=list()
 isinHPD=list()
+switch_on_list = list()
+switch_on_PD_list = list()
+correct_switch_ratio_list = list()
+savage_dickey_ratios_list=list()
 
 
 log_dirs     =  lapply(dir_names, function(dir) paste(dir, "/logs", sep=""))
@@ -401,10 +289,11 @@ for (dir in 1:length(dir_names)){
   
   repeat{
     
-    dir_name =log_dirs[[dir]]
+    dir_name = log_dirs[[dir]]
     
     list.files(paste(dir_name,"/" ,sep=""), all.files=TRUE)
-    file_list = list.files(paste(dir_name,"/" ,sep=""), all.files=TRUE)
+    file_list = list.files(paste(dir_name,"/" ,sep=""))
+    
     #prior_file_list=list.files(prior_dir)
     
     file_list=file_list[grep("_log$",unlist(file_list),fixed=FALSE)]
@@ -413,6 +302,9 @@ for (dir in 1:length(dir_names)){
     run_list=file_list[grep("RFBS",unlist(file_list),fixed=FALSE)]
     
     run_list=run_list[-1]
+    
+    run_list = run_list[as.numeric(unlist(lapply(str_split(run_list, "_"), function(i) i[[1]])))<90]
+    
     #run_list=file_list[grep("DEC",unlist(file_list),fixed=FALSE)]
     
     # prior_run=prior_file_list[grep("_log$",unlist(prior_file_list),fixed=FALSE)]
@@ -438,25 +330,80 @@ for (dir in 1:length(dir_names)){
   
   sim_pars=sim_pars_full[,4:ncol(sim_pars_full)]
   
+  sim_pars_off = sim_pars==0
   
+  rowSums(sim_pars_off)
   
   burnin=0.5
-  
-  
+  sim_pars_filler= sim_pars
+  sim_pars_filler = sim_pars_filler * Inf
   {
-    isin_HPD=sim_pars
-    lower_HPD=sim_pars
-    upper_HPD=sim_pars
-    ESS=sim_pars
-    post_mean=sim_pars
-    post_median=sim_pars
+    isin_HPD   =sim_pars_filler 
+    lower_HPD  =sim_pars_filler 
+    upper_HPD  =sim_pars_filler 
+    ESS        =sim_pars_filler 
+    post_mean  =sim_pars_filler 
+    post_median =sim_pars_filler 
+    switch_on_PD = sim_pars_filler 
+    correct_switch_ratio = sim_pars_filler 
+    switch_on = sim_pars !=0
     
-    for (sim in 1:length(sim_pars_strings_unique)){
+    savage_dickey_ratios = sim_pars_filler 
+    
+    for (sim in 1:length(  sim_pars_strings_unique)){
       
       #  for (sim in 1:5){
-      print(sim)
+      print(sim) 
       #sort files based on same simulating pars
-      runs=run_list[sim_pars_strings==sim_pars_strings_unique[[sim]]]
+      runs=run_list[sim_pars_strings==sim_pars_strings_unique[[sim]] ]
+      
+      {
+      #col.names = c("iter",
+      #              "lL_c",
+      #              "prunelL_c",
+      #              "rate_priorlL_c",
+      #              "clado_priorlL_c",
+      #              "_rf1_l_s",
+      #             "_rf2_l_d",
+      #              "_rf1_g_s",
+      #              "_rf2_l_s",
+      #              "_rf2_g_d",
+      #              "_rf2_g_s",
+      #              "switch_rf1_l_s",
+      #             "switch_rf2_l_d",
+      #              "switch_rf1_g_s",
+      #              "switch_rf2_l_s",
+      #              "switch_rf2_g_d",
+      #              "switch_rf2_g_s",
+      #              "split",
+      #              "sub",
+      #              "equal",
+      #              "switch_split",
+      #              "switch_sub",
+      #              "switch_equal",
+      #              "AR_rf1_l_s",
+      #             "AR_rf2_l_d",
+      #              "AR_rf1_g_s",
+      #              "AR_rf2_l_s",
+      #              "AR_rf2_g_d",
+      #              "AR_rf2_g_s",
+      #              "AR_switch_rf1_l_s",
+      #             "AR_switch_rf2_l_d",
+      #              "AR_switch_rf1_g_s",
+      #              "AR_switch_rf2_l_s",
+      #              "AR_switch_rf2_g_d",
+      #              "AR_switch_rf2_g_s",
+      #              "AR_clado_split_prob",
+      #              "AR_clado_sub_prob",
+      #              "AR_clado_equal_prob",
+      #             "AR_switch_clado_split_prob",
+      #             "AR_switch_clado_sub_prob",
+      #             "AR_switch_clado_equal_prob")
+      }
+      
+      
+      #col.names = col.names[!grepl("l_d",col.names)]
+      
       test=lapply(runs, function(run) read.table(paste(dir_name,run, sep="/"), header = T))
       
       for (run in 1:length(runs)){
@@ -468,6 +415,7 @@ for (dir in 1:length(dir_names)){
       }
       
       
+
       if(chain_length<100){
         
         lower_HPD[sim,]=NA
@@ -478,6 +426,8 @@ for (dir in 1:length(dir_names)){
         post_mean[sim,]=NA
         post_median[sim,]=NA
         
+        switch_on_PD[sim,] = NA
+        correct_switch_ratio[sim,] = NA
         #ESS_list[[dir]]=ESS
         #HPD_list[[dir]]=isin_HPD
         
@@ -490,30 +440,67 @@ for (dir in 1:length(dir_names)){
         ##polygon(density(test[[1]]$sub))
         #polygon(density(test[[1]]$equal))
         
-        colnames(test[[run]])
-        
+        npars= length(grep("X_" ,colnames(test[[run]]))) +3
+        nswitches = npars
         #-4 without clado par,-5 with
         
         npars=(ncol(test[[1]])-5)/2
         
         #5:(4+) without clado par, 6:(5+)
-        chain_ind_vec=6:(5+npars)
         
-        chain_list=colnames(test[[1]])[chain_ind_vec]
+        par_ind_vec   = c(grep("X_" ,colnames(test[[run]])), grep("^split$" ,colnames(test[[run]])),grep("^sub$" ,colnames(test[[run]])), grep("^equal$" ,colnames(test[[run]])))
+        switch_ind_vec =grep("^switch_" ,colnames(test[[run]])) 
+        
+        chain_list=colnames(test[[1]])[par_ind_vec]
         
         
         
-        for (chain in 1:length(chain_ind_vec)){
+        
+        for (chain in 1:length(chain_list)){
+          #print(chain)
+          HPD=HPDinterval(as.mcmc(test[[run]][,par_ind_vec[[chain]]]), prob=0.95)   
           
-          HPD=HPDinterval(as.mcmc(test[[run]][,chain_ind_vec[[chain]]]), prob=0.95)   
+          kd = density(test[[run]][,par_ind_vec[[chain]]] )
+          #plot(kd)
+          #estimated_density <- approx(kd$x, kd$y, xout = 0)$y
+          #estimated_density[is.na(estimated_density)] = 0.0
+          y= test[[run]][,par_ind_vec[[chain]]] 
+          xx <- seq(0, max(y), length = 500)
+          ## bandwidth
+          h <- 0.01
+          ## get KDE using Gamma kernel
+          den <- Gamma(x = xx, y = y, k = 500, h = h)
+          #plot(den)
+          ## evaluate at x=0
+          estimated_density = den$y[den$x==0]
+        
+          if(length(estimated_density )>1){
+            
+            if(length(unique(estimated_density ))==1){
+              
+              estimated_density = estimated_density[1]
+            }else{
+              
+              xxx
+            }
+            
+          }
+          
+          if(par_ind_vec[[chain]]>17){
+            prior_density = dunif(x = 0, min = 0, max = 1)
+            
+          }else{
+            prior_density = dexp(x = 0, rate = 1)
+          }
+          savage_dickey_ratios[sim,chain] = log(estimated_density/prior_density)
           
           lower_HPD[sim,chain]=HPD[1]
           upper_HPD[sim,chain]=HPD[2]
           
-          ESS[sim,chain]=effectiveSize(as.mcmc(test[[run]][,chain_ind_vec[[chain]]]))   
+          ESS[sim,chain]=effectiveSize(as.mcmc(test[[run]][,par_ind_vec[[chain]]]))   
           isin_HPD[sim,chain]=between(sim_pars[sim,chain],HPD[1],HPD[2])
-          post_mean[sim,chain]=mean(test[[run]][,chain_ind_vec[[chain]]])
-          post_median[sim,chain]=median(test[[run]][,chain_ind_vec[[chain]]])
+          post_mean[sim,chain]=mean(test[[run]][,par_ind_vec[[chain]]])
+          post_median[sim,chain]=median(test[[run]][,par_ind_vec[[chain]]])
           
           ESS_list[[dir]]=ESS
           HPD_list[[dir]]=isin_HPD
@@ -521,13 +508,67 @@ for (dir in 1:length(dir_names)){
           
         }
         
+        for (chain in 1:length(switch_ind_vec)){
+          #print(chain)
+          
+          #sum(test[[run]][[,switch_ind_vec[[chain]]]]])
+          switch_on[sim,chain] = sim_pars[sim,chain] != 0
+          
+          switch_on_PD[sim,chain] = sum(test[[run]][,par_ind_vec[[chain]]]!=0)/nrow(test[[run]])
+
+          #test[[run]]$X_rf1_l_s!=0
+          
+          #test[[run]]$switch_rf1_l_s
+          
+        
+          if(switch_on_PD[sim,chain]>1.0){
+            print(sim)
+            print(chain)
+            XXXXXXX
+          }
+          
+         if(sim_pars[sim,chain] == 0){
+           
+           correct_switch_ratio[sim,chain]  =   switch_on_PD[sim,chain]
+           
+         }else {
+           
+           correct_switch_ratio[sim,chain]  =  1 - switch_on_PD[sim,chain]
+           
+         }
+          
+          
+        }
+        
+        
       }
+      
+      
+      if(any(na.omit(correct_switch_ratio[sim,]) >1.0)){
+        print(sim)
+        print("632")
+        print(chain)
+        XXXXXXX
+      }
+      
       
     }
     
     
   }  
-  print(round(rbind(isin_HPD,colSums(isin_HPD)/nrow(isin_HPD)),digits = 4))
+  
+  if(length(which(correct_switch_ratio>1))>0){
+    print(dir)
+    print(which(correct_switch_ratio>1))
+    print("641")
+    XXXXXX
+  }
+  
+  
+  
+  #mean(correct_switch_ratio[,1][sim_pars[,1]==0])
+  
+  #print(round(rbind(isin_HPD,colSums(isin_HPD)/nrow(isin_HPD)),digits = 4))
   
   #print(colSums(isin_HPD)/nrow(isin_HPD))
   print(dir_name)
@@ -548,22 +589,175 @@ for (dir in 1:length(dir_names)){
   
   HPD_colors=c("red", "blue")
   
-  sim_pars_total_list[[dir]]     =    sim_pars_total   
-  post_median_total_list[[dir]]  =   post_median_total
-  lower_HPD_list[[dir]]          =   lower_HPD       
-  upper_HPD_list[[dir]]          =   upper_HPD       
-  isin_HPD_list[[dir]]           =   isin_HPD        
-  chain_list_list[[dir]]         =   chain_list      
+  
+
+  sim_pars_total_list[[dir]]       =    sim_pars_total   
+  post_median_total_list[[dir]]    =   post_median_total
+  lower_HPD_list[[dir]]            =   lower_HPD       
+  upper_HPD_list[[dir]]            =   upper_HPD       
+  isin_HPD_list[[dir]]             =   isin_HPD        
+  chain_list_list[[dir]]           =   chain_list      
+  switch_on_PD_list[[dir]]         = switch_on_PD
+  correct_switch_ratio_list[[dir]] = correct_switch_ratio
+  switch_on_list[[dir]]            = switch_on
+  savage_dickey_ratios_list[[dir]] = savage_dickey_ratios
+  
+  if(length(which(correct_switch_ratio_list[[dir]]>1))>0){
+    print(dir)
+    print(which(correct_switch_ratio_list[[dir]]>1))
+    XXXXXX
+  }
+  
   
 }
 
 
+#par_names    = col.names[par_ind_vec ][1:5]
+#switch_names = col.names[switch_ind_vec][1:5]
+
 #####plot#####
+
+
+correct_switch_ratio_list[[1]][12]
+
+correct_switch_ratio_list[[1]][3,]
+which(correct_switch_ratio_list[[1]]>0.8 & !switch_on_list[[1]])
+sum(correct_switch_ratio_list[[1]]>1)
+  
+library(vioplot)
+
+{
+    
+
+    #palette <- distinctColorPalette(n)
+    
+    palette=c("red", "blue", "gray" )
+    
+
+    col_vec=c("red", "blue")
+    
+
+    par_names=c(
+     "1-0",
+     "2-0", 
+     "0-1",
+     "2-2",
+     "2-1",
+     "0-2",
+     "1-2"
+    )
+    
+    for( i in 1:length(par_names)){
+      
+      pdf(paste("/Volumes/michael.landis/Active/Sean/RFBS/outfiles/sim_plots/",par_names[[i]] ,"_ana_switch_support.pdf", sep=""),width = 8,height = 10)
+      
+      par(mfrow=c(3,2))
+      
+      for(x in 1:length(correct_switch_ratio_list)){
+
+
+        
+          
+           on_correct    = (switch_on_PD_list[[x]][switch_on_list[[x]][,i]==1,i])
+          off_correct    = (switch_on_PD_list[[x]][switch_on_list[[x]][,i]!=1,i])
+         # either_correct = (correct_switch_ratio_list[[x]][,i])
+       
+          vioplot(on_correct,off_correct,names = c("on", "off"),col = col_vec,ylim = c(0,1), main= new_expr <- bquote(.(par_names[[i]]) ~ .(dir_labels[[x]])))
+
+       }
+        
+      dev.off()
+    }
+}
+
+
+library(vioplot)
+
+{
+  
+  
+  #palette <- distinctColorPalette(n)
+  
+  palette=c("red", "blue", "gray" )
+  
+  
+  col_vec=c("red", "blue")
+  
+  
+  par_names=c(
+    "1-0",
+    #"2-0", 
+    "0-1",
+    "2-2",
+    "2-1",
+    "0-2",
+    "1-2"
+  )
+  
+  for( i in 1:length(par_names)){
+    
+    pdf(paste("/Volumes/michael.landis/Active/Sean/RFBS/outfiles/sim_plots/","sw_double_",par_names[[i]] ,"_savage_dickey.pdf", sep=""),width = 8,height = 10)
+    
+    par(mfrow=c(3,2))
+    
+    max_lim=0
+    min_lim=0
+    for(x in 1:length(correct_switch_ratio_list)){
+      on_correct    = (savage_dickey_ratios_list[[x]][switch_on_list[[x]][,i]==1,i])
+      off_correct    = (savage_dickey_ratios_list[[x]][switch_on_list[[x]][,i]!=1,i])
+      on_correct  = na.omit(on_correct[on_correct <Inf])
+      off_correct = na.omit(off_correct[off_correct <Inf])
+      
+      
+     max_lim =  max(c(max_lim, on_correct , off_correct ))
+     min_lim =  min(c(max_lim, on_correct , off_correct ))
+     
+     max_lim =  3
+     min_lim =  -3
+     
+     
+    }
+    for(x in 1:length(correct_switch_ratio_list)){
+        
+      on_correct    = (savage_dickey_ratios_list[[x]][switch_on_list[[x]][,i]==1,i])
+      off_correct    = (savage_dickey_ratios_list[[x]][switch_on_list[[x]][,i]!=1,i])
+      # either_correct = (correct_switch_ratio_list[[x]][,i])
+      on_correct  = na.omit(on_correct[on_correct <Inf])
+      off_correct = na.omit(off_correct[off_correct <Inf])
+      vioplot(on_correct,off_correct,names = c(paste(length(on_correct), "on"), paste(length(off_correct), "off")),col = col_vec,ylim = c(min_lim,max_lim), main= new_expr <- bquote(.(par_names[[i]]) ~ .(dir_labels[[x]])))
+      
+    }
+    
+    dev.off()
+  }
+}
+
+
+
+#post_median_total/
+
+
+
+
+for( i in 1:length(par_names)){
+  
+  
+  
+
+  on_correct    = (switch_on_PD_list[[x]][switch_on_list[[x]][,i]==1,i])
+  off_correct    = (switch_on_PD_list[[x]][switch_on_list[[x]][,i]!=1,i])
+  # either_correct = (correct_switch_ratio_list[[x]][,i])
+    
+}
+
+
 
 {
   par_names=c(
     expression(italic(l)[1 %->% 0]), 
+    expression(italic(l)[2 %->% 0]),
     expression(italic(g)[0 %->% 1]),
+    expression(italic(sw)[2]),
     expression(italic(l)[2 %->% 1]),
     expression(italic(g)[0 %->% 2]),
     expression(italic(g)[1 %->% 2]),
@@ -571,51 +765,37 @@ for (dir in 1:length(dir_names)){
     expression(italic(w)[i]),
     expression(italic(e)[i])
   )
+  n_transpars = length( par_names) - 3
   
-  ESS_rows=1:5
-  
-  
-  
+  ESS_rows=1:n_transpars 
   
   
-  pdf(paste(workdir,"/", "3_150tip_ambig.pdf", sep=""), width = 30, height = 20)
-  #par(mfrow=c(2,2))
-  layout_matrix= createLayoutMatrix(Nrow = 1, Ncol = 8, blockRows = length(dir_labels), blockCols = 1, gridFillOrder  = "byrow", blockFillOrder = "byrow")     
-  layout(layout_matrix)
+  
+  
+  
+ # pdf(paste(workdir,"/", "95p_3_150tip.pdf", sep=""), width = 20, height = 15)
+  #par(mfrow=c(5,2))
+  #layout_matrix= createLayoutMatrix(Nrow = 2, Ncol = 4, blockRows = 2, blockCols = 2, gridFillOrder  = "byrow", blockFillOrder = "byrow")     
+  #layout(layout_matrix)
   
   # par(oma=c(0,0,3,0));  
   
   for (dir in 1:length(sim_pars_total_list)){
     
+    pdf(paste(workdir,"/", dir, "_sw_95p_3_150tip_double_.pdf", sep=""), width = 20, height = 15)
+    par(mfrow=c(5,2))
+    
     # pdf(paste(workdir,"/",dir_name,"/",dir_name, "_posterior_median_lineplot.pdf", sep=""))
     
-    if(dir==1){
-     sim_pars_total   = sim_pars_total_list[[dir]]   [-1,]
-     post_median_total= post_median_total_list[[dir]][-1,]
-     lower_HPD        = lower_HPD_list[[dir]]        [-1,]
-     upper_HPD        = upper_HPD_list[[dir]]        [-1,]
-     isin_HPD         = isin_HPD_list[[dir]]         [-1,]
-     chain_list       = chain_list_list[[dir]]   
-     ESS              = ESS_list[[dir]]              [-1,]
-    }else{
-    
-    sim_pars_total   = sim_pars_total_list[[dir]]   
-    post_median_total= post_median_total_list[[dir]]
-    lower_HPD        = lower_HPD_list[[dir]]        
-    upper_HPD        = upper_HPD_list[[dir]]        
-    isin_HPD         = isin_HPD_list[[dir]]         
-    chain_list       = chain_list_list[[dir]]       
-    ESS              = ESS_list[[dir]]              
-    
-    } 
     
     
-
-    
-    
-    
-    
-    
+    sim_pars_total   =sim_pars_total_list[[dir]]   
+    post_median_total=post_median_total_list[[dir]]
+    lower_HPD       =lower_HPD_list[[dir]]        
+    upper_HPD       =upper_HPD_list[[dir]]        
+    isin_HPD        =isin_HPD_list[[dir]]         
+    chain_list      =chain_list_list[[dir]]       
+    ESS             = ESS_list[[dir]]
     
     
     
@@ -648,7 +828,7 @@ for (dir in 1:length(dir_names)){
       
       for (i in 1:ncol(post_median_total)){
         
-        if(i>5){
+        if(i>n_transpars){
           
           max_val= 1
           
@@ -660,7 +840,7 @@ for (dir in 1:length(dir_names)){
           
         }else{
           
-          max_val=max(unlist(post_median_total))
+          max_val=max(unlist(na.omit(post_median_total[post_median_total<Inf])))
           
           max=as.integer(max_val+max_val*0.1)
           
@@ -710,7 +890,7 @@ for (dir in 1:length(dir_names)){
     
     # mtext(paste(dir_labels[[dir]]), side=3, line=0, cex=2 , outer=TRUE)  #"n=", length(good_rows))
     #box("outer", cex=2) 
-    
+    dev.off()
   }
   #file.copy(paste(workdir,"/",dir_name,"/", dir_name, "_posterior_median_lineplot.pdf", sep=""), "/Volumes/michael.landis/Active/RFBS_RIS/rf_sim_plots/posterior_medians/")
   #title(  paste(uncertainty_labels[[dir]]), line = -27, outer = TRUE)
@@ -719,11 +899,9 @@ for (dir in 1:length(dir_names)){
   
   
   
-  dev.off()
+ 
   
 }
-
-#post_median_total/
 
 
 #######
