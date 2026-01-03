@@ -468,7 +468,7 @@ function fill_subsplit_cladoPmat(clado_Pmat,
 end
 
 
-function make_clado_Pmat(rf_states, ecological, allopatric )
+function make_clado_Pmat(rf_states, ecological, allopatric, pars_off=[] )
 
 
   clado_prior_vec=[Uniform(0,1),
@@ -476,14 +476,28 @@ function make_clado_Pmat(rf_states, ecological, allopatric )
 
   clado_prior_dists=make_Prior(clado_prior_vec, "split_sub_equal")
 
+
   #clado_probs_sim=[rand(clado_prior_dists[i]) for i in eachindex(clado_prior_dists)]
   clado_probs_sim=sample_sub_split_equal_clado_rates(clado_prior_dists)
+
+
+
+    for rate_par in pars_off
+
+      clado_probs_sim[rate_par,2] = 0.0
+
+    end
+
+    clado_probs_sim[:,2] .= clado_probs_sim[:,2]./sum(clado_probs_sim[:,2])
+
+
+
 
   cladoPmat_unpar=makeclado_Pmat_equal_prob(rf_states, ecological, allopatric)
 
   String_Clado_Mats ,split_index_vec, sub_index_vec=get_cladoPmat_par_vecs(cladoPmat_unpar)
 
-  print(clado_probs_sim[:,2])
+  #print(clado_probs_sim[:,2])
   cladoPmat_sim=fill_subsplit_cladoPmat(cladoPmat_unpar, 
                                     clado_probs_sim[:,2],
                                     split_index_vec,
@@ -513,6 +527,7 @@ function sample_sub_split_equal_clado_rates(clado_prior_dists)
   return(clado_probs_sim)
 
 end
+
 
 function get_cladoPmat_par_vecs(clado_Pmat)
 #creates arrays of cartesian indices for cladoPmat elements that are "cladogenetic range splits" or "cladogenetics range subset" 

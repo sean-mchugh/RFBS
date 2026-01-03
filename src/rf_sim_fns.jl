@@ -7,7 +7,8 @@ function sim_rf_tips(rf_states::Vector{Vector{Int64}},
                      cladoPmat::Array{Float64, 3},
                      tree_file     ::String,
                      ntips::Int64,
-                     rescale_tree::Bool=true
+                     rescale_tree::Bool=true,
+                     nexus_file_type::Bool=false
             )
 
 
@@ -22,7 +23,7 @@ function sim_rf_tips(rf_states::Vector{Vector{Int64}},
 
   else
           
-    tree, bts = read_tree(tree_file)  
+    tree, bts = read_tree(tree_file, order  = "cladewise",  branching_times = true, nexus_file_type=nexus_file_type)  
           
   end
   # sort according to branching times

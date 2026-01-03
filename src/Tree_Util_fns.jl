@@ -40,12 +40,30 @@ to call **ape** tree reading capabilities.
 """
 function read_tree(tree_file      ::String; 
                    order          ::String = "cladewise", 
-                   branching_times::Bool = true)
+                   branching_times::Bool = true,
+                   nexus_file_type::Bool=false)
 
+  if(nexus_file_type)
+    str = reval("""
+    library(\"ape\")
+    print('loaded ape')
+    tree     <- read.nexus('$tree_file') 
+    print('read tree')
+    #tree     <- reorder(tree, order = '$order')
+    print('ordered tree')
+    edge     <- .subset2(tree,'edge')
+    Nnode    <- .subset2(tree,'Nnode')
+    tiplabel <- .subset2(tree,'tip.label')
+    edlength <- .subset2(tree,'edge.length')
+    list(edge,Nnode,tiplabel,edlength)
+  """)
+
+    
+  else
   str = reval("""
                 library(\"ape\")
                 print('loaded ape')
-                tree     <- read.nexus('$tree_file') 
+                tree     <- read.tree('$tree_file') 
                 print('read tree')
                 #tree     <- reorder(tree, order = '$order')
                 print('ordered tree')
@@ -55,6 +73,7 @@ function read_tree(tree_file      ::String;
                 edlength <- .subset2(tree,'edge.length')
                 list(edge,Nnode,tiplabel,edlength)
               """)
+  end
 
   edge     = rcopy(str[1])
   edge     = convert(Array{Int64},edge)
@@ -63,6 +82,7 @@ function read_tree(tree_file      ::String;
   tiplabel = rcopy(str[3])
   edlength = rcopy(str[4])
   edlength = convert(Array{Float64},edlength)
+
 
   tree = rtree(edge, edlength, tiplabel, Nnode)
 
