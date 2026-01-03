@@ -1,5 +1,14 @@
 
 
+#cd(@__DIR__)
+
+
+cd("/Volumes/michael.landis/Active/Sean/RFBS/scripts/analysis_scripts/anc_aff_accuracy_scripts")
+
+
+cd("../..")
+pwd()
+
 
 using 
 #Tapestree, 
@@ -18,6 +27,8 @@ ExponentialUtilities,
 # StatsPlots, Plots, 
 # Phylo, Optim, 
  DelimitedFiles
+ # PProf
+#using PhyloNetworks
  # PProf
 #using PhyloNetworks
 #using MCMCDiagnosticTools
@@ -48,83 +59,101 @@ include(pwd() *"/src/post_pred_fns.jl")
 
 
 
-allow_double_gains =parse(Bool, ARGS[1])
-allow_double_losses=parse(Bool, ARGS[2])
-allow_single_gains =parse(Bool, ARGS[3])
-allow_single_losses=parse(Bool, ARGS[4])
-by_biome           =parse(Bool, ARGS[5])
-by_rf              =parse(Bool, ARGS[6])
-by_gainloss        =parse(Bool, ARGS[7])
-by_doublesingle    =parse(Bool, ARGS[8])
-DEC                =parse(Bool, ARGS[9])                
-UP                 =parse(Float64, ARGS[10])
-SG                 =parse(Float64, ARGS[11])
-SGP                =parse(Float64, ARGS[12])
-uncertain_tips     =parse(Bool,ARGS[13])
-Prior              =parse(Float64,ARGS[14])
-prior_only         =parse(Bool,ARGS[15])
-ntips              =parse(Int64,ARGS[16])
-run_num            =parse(Int64,ARGS[17])           
+#allow_double_gains =parse(Bool, ARGS[1])
+#allow_double_losses=parse(Bool, ARGS[2])
+#allow_single_gains =parse(Bool, ARGS[3])
+#allow_single_losses=parse(Bool, ARGS[4])
+#by_biome           =parse(Bool, ARGS[5])
+#by_rf              =parse(Bool, ARGS[6])
+#by_gainloss        =parse(Bool, ARGS[7])
+#by_doublesingle    =parse(Bool, ARGS[8])
+#DEC                =parse(Bool, ARGS[9])                
+#UP                 =parse(Float64, ARGS[10])
+#SG                 =parse(Float64, ARGS[11])
+#SGP                =parse(Float64, ARGS[12])
+#uncertain_tips     =parse(Bool,ARGS[13])
+#Prior              =parse(Float64,ARGS[14])
+#prior_only         =parse(Bool,ARGS[15])
+#ntips              =parse(Int64,ARGS[16])
+#run_num            =parse(Int64,ARGS[17])           
 
 
-#allow_double_gains =true
-#allow_double_losses=false
-#allow_single_gains =true
-#allow_single_losses=true
-#by_biome           =false
-#by_rf              =true
-#by_gainloss        =true
-#by_doublesingle    =true
-#DEC                =false        
-#UP                 =0.1
-#SG                 =0.1
-#SGP                =0.1
-#uncertain_tips     =false
-#Prior=1.0
-#prior_only=false
-#ntips=150
-#run_num=1
+
+   allow_double_gains =true
+   allow_double_losses=false
+   allow_single_gains =true
+   allow_single_losses=true
+   by_biome           =false
+   by_rf              =true
+   by_gainloss        =true
+   by_doublesingle    =true
+   DEC                =false        
+   UP                 =0.1
+   SG                 =0.1
+   SGP                =0.1
+   uncertain_tips     =false
+   Prior=1.0
+   prior_only=false
+   ntips=150
+   run_num=1
+   absorb_states=false
+
+   allow_switches = true
+
+   fun2non=true
+
+
+    reps=1
+    start_truesim=false
+    prior_only   
+
 #absorb_states=false
-fun2non=true
-
-
-#absorb_states=false
 
 
 
-
-
-#cd(@__DIR__)
-#LOOCV=false
-#LOOCV_tip_drop_num=5
-
-
-cd(@__DIR__)
-
-cd("..")
-
-#uncertain_tips=false
-#UP =0.1
-#SG =0.1
-#SGP=0.1
- # PProf
-#using PhyloNetworks
-#using MCMCDiagnosticTools
-#using MCMCChains
 
 reps=1
 start_truesim=false
+prior_only   
+
+iters                   =100
+iter_trims         =iters/1
+anc_state_sampling =iters/1
+write_interval           =1
+post_pred_iters          =1
+post_pred_write_interval =1
+#iters                   =2500
+#iter_trims         =iters/2500
+#anc_state_sampling =iters/2500
+#write_interval           =1
+#post_pred_iters          =1
+#post_pred_write_interval =1
 
 
-iters                  =1000000
-iter_trims         =iters/5000
-anc_state_sampling =iters/5000
-write_interval           =1000
-post_pred_iters          =5000
-post_pred_write_interval =1000
+
 
 rate_tuning_par=1.5
 clado_tuning_par=0.4
+
+N_rate_pars_off              =0
+N_clado_pars_off             =0
+Rtree=true
+#set the value of all pars to 1
+single_par=false
+
+#iters                   =2500
+#iter_trims         =iters/2500
+#anc_state_sampling =iters/2500
+#write_interval           =1
+#post_pred_iters          =1
+#post_pred_write_interval =1
+
+proposal_probs = (rate_move = 10 , clado_move = 5 , rate_zero_switch = 0, clado_zero_switch = 0 )
+
+
+rate_tuning_par=1.5
+clado_tuning_par=0.4
+
 
 
 
@@ -225,15 +254,8 @@ end
 
 ######make directory name based on run arguements######################
 
+dir_name=  string(ntips)*"t_"*string(nbiomes_g[1])*"nB_"*prior_label*"iter_"* string(iters) * "_Ncladooff_" * string(N_clado_pars_off) * "_Nrateoff_" * string(N_rate_pars_off)
 
-#if absorb_states
-#
-#    dir_name="Abs"*string(ntips)*"t_"*string(nbiomes_g[1])*"nB_"*prior_label*"iter_"* string(iters)
-#
-#else
-#
-    dir_name=string(ntips)*"t_"*string(nbiomes_g[1])*"nB_"*prior_label*"iter_"* string(iters)
-#end
 
 if DEC
 
@@ -247,7 +269,6 @@ else
     dir_name=dir_name*"_f2r"
 
 end
-
 
 if start_truesim==true
     dir_name="TS_"*dir_name
@@ -276,6 +297,12 @@ end
 if allow_single_losses==true
     dir_name=dir_name*"_1l"
 end
+
+if allow_switches==true
+    dir_name=dir_name*"_2sw"
+end
+
+
 if single_par==true
     dir_name= dir_name*"_1p"
 end
@@ -304,17 +331,18 @@ if by_doublesingle ==true
     dir_name= dir_name*"_ds"
 end
 
-dir_name ="outfiles/sim/BSim_RFBS_DEC_comp"*replace(dir_name,r" "  => s"_")
+
+dir_name ="outfiles/anc_aff_sim/BSim_RFBS_DEC_comp"*replace(dir_name,r" "  => s"_")
 
 
 if !isdir(dir_name)
-    #getting a file already eixsts error, let this cause a brief random pause before
- if !isdir(dir_name)
+
+    if !isdir(dir_name)
 
 
-     mkdir(dir_name)
+        mkpath(dir_name)
 
- end
+    end
 end
 
 
@@ -327,7 +355,8 @@ end
     allow_double_losses=true
     allow_single_gains =false
     allow_single_losses=false
-    
+    allow_real_switches=false
+    allow_realfun_switches= true
 
     by_biome           =false
     by_rf              =false
@@ -345,10 +374,12 @@ simtree_files=readdir(dir_name*"/sim_R_trees/")
 
 rtree_label_file=simtree_files[startswith.( simtree_files, string(run_num)*"_")][1]
 
+#split(readdlm(dir_name*"/sim_R_trees/"*rtree_label_file)[1,1], "\t")[2]
 
-rtree_file=("data/sim/R_trees/R_tree_"*string(ntips)*"tips/R_tree_"*split(split(simtree_files[startswith.( simtree_files, string(run_num))][1], "_")[end], ".")[1] )
+rtree_file= split(readdlm(dir_name*"/sim_R_trees/"*rtree_label_file)[1,1], "\t")[2]
+#rtree_file= ("data/sim/R_trees/R_tree_"*string(ntips)*"tips/R_tree_"*split(split(simtree_files[startswith.( simtree_files, string(run_num))][1], "_")[end], ".")[1] )
 
-tree, bts = read_tree(rtree_file)  
+tree, bts = read_tree(string(rtree_file)  )
 
 
 
@@ -460,16 +491,6 @@ DEC_job_Bool_vec=[
     allopatric  ]
     
 
-#posterior_tip_pred_wrapper(post_pred_iters,post_pred_write_interval, DEC_posterior_vec, 
-#                            DEC_tip_states, 
-#                            rtree_file,
-#                           dir_name,
-#                           DEC_model_par_names,
-#                           nbiomes,
-#                           max_range,
-#                           DEC_post_pred_log_filename, false,
-#                           DEC_job_Bool_vec
-#                           )      
 
 
 DEC_anc_states_log_mat = readdlm(dir_name *"/logs/"*string(run_num)* "_DEC_"*file_name*"_log_anc_states")
@@ -503,32 +524,3 @@ log_file =  open(dir_name*"/anc_acc/"*string(run_num)*"_DEC_"*file_name*"_anc_af
 close(log_file)
 
 
-
-#
-#if LOOCV==true
-#
-#    LOOCV_aff_cc=DEC_anc_aff_acc[LOOCV_tip_ind,:]
-#
-#    if !isdir(dir_name*"/LOOCV")
-#        mkdir(dir_name*"/LOOCV")
-#    end
-#    
-#
-#    log_file =  open(dir_name*"/LOOCV/"*"DEC_"*file_name*"_LOOCV_acc","a")
-#
-#        [println(log_file, join(LOOCV_aff_cc[i,:],"\t")) for i in eachindex(LOOCV_aff_cc[:,1])]
-#
-#    close(log_file)
-#
-#
-#end
-#
-
-#DEC_post_pred_log_filename=(dir_name*"/post_pred/"*"DEC_"*file_name*"_post_pred")
-##DEC posterior prediction            
-#DEC_log_mat = readdlm(DEC_log_filename)
-#DEC_par_chain=DEC_log_mat[Int(round(size(DEC_log_mat )[1]*burnin)):end,6:(6+length(DEC_move_types))]
-#DEC_model_par_names=DEC_log_mat[1,6:(6+length(DEC_move_types))]
-#
-#DEC_posterior_vec=[Float64.(DEC_par_chain[i,:]) for i in 1:size(DEC_par_chain)[1]]
-                        

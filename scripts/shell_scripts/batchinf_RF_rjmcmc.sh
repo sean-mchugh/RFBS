@@ -21,21 +21,21 @@ DS_LIST=$(seq 0 0)
 bDS=(   "true"    "false"  ) 
 
 MISSING_LIST=$(seq 0 0)   
-UP=(    "1.00" "1.00" "1.00" "1.00" "1.00" "1.00" "1.00" "1.00" "1.00" "1.00"   )
-SGCOV=( "0.33" "0.33" "0.66" "0.33" "0.66" "0.33" "0.66" "0.33" "0.66" "1.00"   )
-SGPER=( "0.25" "0.25" "0.25" "0.50" "0.50" "0.75" "0.75" "1.00" "1.00" "1.00"   )
-UT=(   "false" "true" "true" "true" "true" "true" "true" "true" "true" "true"  )
+UP=(    "1.00" "1.00" "1.00"  "1.00" "1.00"   )
+SGCOV=( "0.33" "0.33" "0.66"  "0.33" "0.66"   )
+SGPER=( "0.25" "0.25" "0.25"  "0.75" "0.75"   )
+UT=(   "false" "true" "true"  "true" "true"  )
 
-PRIOR_LIST=$(seq 1 1)
-PRIOR=("0.5" "1.0" "2.0")
+PRIOR_LIST=$(seq 0 0)
+PRIOR=("0.5" )
 
 PRIORONLY_LIST=$(seq 1 1)
 PRIORONLY=("true" "false")
 
-TREE_LIST=$(seq 1 1)
-TREE_SIZE=("50" "150" "500" )
+TREE_LIST=$(seq 0 0)
+TREE_SIZE=("150")
 
-RUN_LIST=$(seq 1 110)
+RUN_LIST=$(seq 1 500)
 
 
 for i in ${RUN_LIST[@]}
@@ -72,8 +72,8 @@ do
 			-J $NAME \
 			-q general \
 			-g /m.seanwmchugh/rf_DEC_comp \
-			-n 1 -M 3GB -R "rusage [mem=3GB] span[hosts=1]" \
-			-a 'docker(sswiston/rb_tp:4)' /bin/bash /storage1/fs1/michael.landis/Active/Sean/RFBS/scripts/shell_scripts/rf_DEC_comp.sh
+			-n 1 -M 2GB -R "rusage [mem=2GB] span[hosts=1]" \
+			-a 'docker(sswiston/rb_tp:4)' /bin/bash /storage1/fs1/michael.landis/Active/Sean/RFBS/scripts/shell_scripts/rf_rjmcmc.sh
 			
 	done		
 	done	

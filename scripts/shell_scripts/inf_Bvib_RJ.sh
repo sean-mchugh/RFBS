@@ -32,12 +32,14 @@ DEC=${arr[8]}
 IncF=${arr[9]}
 ExcF=${arr[10]}
 AdjMat=${arr[11]}
-ExcInd=${arr[12]}  #choose which index to pull for exlcusion treatment whether using leafing germination etc, vector of treatment names are in file
-IncInd=${arr[13]}  #choose which index to pull for exlcusion treatment whether using leafing germination etc, vector of treatment names are in file
-RUN=${arr[14]}
+RJ_ANA=${arr[12]}
+RJ_CLADO=${arr[13]}
+ExcInd=${arr[14]}  #choose which index to pull for exlcusion treatment whether using leafing germination etc, vector of treatment names are in file
+IncInd=${arr[15]}  #choose which index to pull for exlcusion treatment whether using leafing germination etc, vector of treatment names are in file
+RUN=${arr[16]}
 
 #julia scripts/RFBSsimestim_DECestim_comp_MCMC.jl ${DG} ${DL} ${SG} ${SL} ${bB} ${bRF} ${bGL} ${bDS} ${DEC} ${UP} ${SGCOV} ${SGPER} ${UT} ${RUN}
 
 #julia scripts/Bvib_parameterized_clado_realfun_test.jl ${DG} ${DL} ${SG} ${SL} ${bB} ${bRF} ${bGL} ${bDS} ${DEC} ${IncF} ${ExcF} ${AdjMat} ${RUN}   
 
-julia scripts/analysis_scripts/Bvib_emp_241504.jl ${DG} ${DL} ${SG} ${SL} ${bB} ${bRF} ${bGL} ${bDS} ${DEC} ${IncF} ${ExcF} ${AdjMat} ${ExcInd} ${IncInd} ${RUN}   
+julia scripts/analysis_scripts/Bvib_emp_25_6_29.jl ${DG} ${DL} ${SG} ${SL} ${bB} ${bRF} ${bGL} ${bDS} ${DEC} ${IncF} ${ExcF} ${AdjMat} ${RJ_ANA} ${RJ_CLADO}  ${ExcInd} ${IncInd} ${RUN}   

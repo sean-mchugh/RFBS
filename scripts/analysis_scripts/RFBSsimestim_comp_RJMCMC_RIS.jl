@@ -1,8 +1,9 @@
 ########simulated data from prior sampled rates values and estimate with RFBS and DEC
 
-#cd(@__DIR__)
-
 cd(@__DIR__)
+
+
+#cd("/Volumes/michael.landis/Active/Sean/RFBS/scripts/analysis_scripts")
 
 
 cd("../..")
@@ -54,67 +55,68 @@ ExponentialUtilities,
 using RCall
 
 include(pwd() *"/src/CladoProbMatrix_fns.jl")
-include(pwd() *"/src/make_rf_par_matrix_fns.jl")
+include(pwd() *"/src/make_rf_par_matrix_fns_switch.jl")
 include(pwd() *"/src/Tree_Util_fns.jl")
 include(pwd() *"/src/rf_sim_fns.jl")
 include(pwd() *"/src/rf_rate_clado_mcmc_fns.jl")
 include(pwd() *"/src/post_pred_fns.jl")
-
+include(pwd() *"/scripts/scratch_ws/RJ_update_mcmc_ws.jl")
 
 ######set run arguements######################
 
-    allow_double_gains =parse(Bool, ARGS[1])
-    allow_double_losses=parse(Bool, ARGS[2])
-    allow_single_gains =parse(Bool, ARGS[3])
-    allow_single_losses=parse(Bool, ARGS[4])
-    by_biome           =parse(Bool, ARGS[5])
-    by_rf              =parse(Bool, ARGS[6])
-    by_gainloss        =parse(Bool, ARGS[7])
-    by_doublesingle    =parse(Bool, ARGS[8])
-    DEC                =parse(Bool, ARGS[9])                
-    UP                 =parse(Float64, ARGS[10])
-    SG                 =parse(Float64, ARGS[11])
-    SGP                =parse(Float64, ARGS[12])
-    uncertain_tips     =parse(Bool,ARGS[13])
-    Prior        =parse(Float64,ARGS[14])
-    prior_only   =parse(Bool,ARGS[15])
-    ntips        =parse(Int64,ARGS[16])
+   allow_double_gains =parse(Bool, ARGS[1])
+   allow_double_losses=parse(Bool, ARGS[2])
+   allow_single_gains =parse(Bool, ARGS[3])
+   allow_single_losses=parse(Bool, ARGS[4])
+   by_biome           =parse(Bool, ARGS[5])
+   by_rf              =parse(Bool, ARGS[6])
+   by_gainloss        =parse(Bool, ARGS[7])
+   by_doublesingle    =parse(Bool, ARGS[8])
+   DEC                =parse(Bool, ARGS[9])                
+   UP                 =parse(Float64, ARGS[10])
+   SG                 =parse(Float64, ARGS[11])
+   SGP                =parse(Float64, ARGS[12])
+   uncertain_tips     =parse(Bool,ARGS[13])
+   Prior              =parse(Float64,ARGS[14])
+   prior_only         =parse(Bool,ARGS[15])
+   ntips              =parse(Int64,ARGS[16])
+   run_num            =parse(Int64,ARGS[17])           
+   
+   
+   
+   #allow_double_gains =true
+   #allow_double_losses=false
+   #allow_single_gains =true
+   #allow_single_losses=true
+   #by_biome           =false
+   #by_rf              =true
+   #by_gainloss        =true
+   #by_doublesingle    =true
+   #DEC                =false        
+   #UP                 =0.1
+   #SG                 =0.1
+   #SGP                =0.1
+   #uncertain_tips     =false
+   #Prior=1.0
+   #prior_only=false
+   #ntips=150
+   #run_num=1
+   #absorb_states=false
 
-    run_num            =parse(Int64,ARGS[17])           
-    #
-    #
-    #
-    #allow_double_gains =true
-    #allow_double_losses=false
-    #allow_single_gains =true
-    #allow_single_losses=true
-    #by_biome           =false
-    #by_rf              =true
-    #by_gainloss        =true
-    #by_doublesingle    =true
-    #DEC                =false        
-    #UP                 =0.1
-    #SG                 =0.1
-    #SGP                =0.1
-    #uncertain_tips     =false
-    #Prior=1.0
-    #prior_only=false
-    #ntips=150
-    #run_num=1
-    #absorb_states=false
+   allow_switches = true
 
-    fun2non=true
+   fun2non=true
 
 
     reps=1
     start_truesim=false
     prior_only   
 
-    iters                   =5000000
-    iter_trims         =iters/5000
-    anc_state_sampling =iters/5000
+    iters                   =1000000
+    iter_trims         =iters/1000
+    anc_state_sampling =iters/1000
     write_interval           =1000
-    post_pred_iters          =5000
+    post_pred_iters          =1000
     post_pred_write_interval =1000
     #iters                   =2500
     #iter_trims         =iters/2500
@@ -126,6 +128,26 @@ include(pwd() *"/src/post_pred_fns.jl")
 
     rate_tuning_par=1.5
     clado_tuning_par=0.4
+
+    N_rate_pars_off              =2
+    N_clado_pars_off             =0
+    Rtree=true
+    #set the value of all pars to 1
+    single_par=false
+
+    #iters                   =2500
+    #iter_trims         =iters/2500
+    #anc_state_sampling =iters/2500
+    #write_interval           =1
+    #post_pred_iters          =1
+    #post_pred_write_interval =1
+
+    proposal_probs = (rate_move = 10 , clado_move = 5 , rate_zero_switch = 5, clado_zero_switch = 0 )
+
+
+    rate_tuning_par=1.5
+    clado_tuning_par=0.4
+
 
 
 
@@ -157,7 +179,6 @@ include(pwd() *"/src/post_pred_fns.jl")
 
 ######set up priors###############################
     #rate_prior_vec  = [LogNormal(-0.5,0.5)]
-    rate_par_proposal_prob=0.8
 
 
     clado_types=["sub_split"]
@@ -175,9 +196,6 @@ include(pwd() *"/src/post_pred_fns.jl")
     max_range_g=[]
     push!(max_range_g, nbiomes_g[1])
 
-    Rtree=true
-    #set the value of all pars to 1
-    single_par=false
     #uncertain_tips=true
 
 
@@ -236,7 +254,7 @@ include(pwd() *"/src/post_pred_fns.jl")
 ######Make outfile directory###############################
 
 
-    dir_name=  string(ntips)*"t_"*string(nbiomes_g[1])*"nB_"*prior_label*"iter_"* string(iters)
+    dir_name=  string(ntips)*"t_"*string(nbiomes_g[1])*"nB_"*prior_label*"iter_"* string(iters) * "_Ncladooff_" * string(N_clado_pars_off) * "_Nrateoff_" * string(N_rate_pars_off)
 
 
     if DEC
@@ -279,6 +297,12 @@ include(pwd() *"/src/post_pred_fns.jl")
     if allow_single_losses==true
         dir_name=dir_name*"_1l"
     end
+
+    if allow_switches==true
+        dir_name=dir_name*"_2sw"
+    end
+
+
     if single_par==true
         dir_name= dir_name*"_1p"
     end
@@ -308,7 +332,7 @@ include(pwd() *"/src/post_pred_fns.jl")
     end
 
 
-    dir_name ="outfiles/sim/BSim_RFBS_DEC_comp"*replace(dir_name,r" "  => s"_")
+    dir_name ="outfiles/sim/resub/rj_switch/BSim_RFBS_DEC_comp"*replace(dir_name,r" "  => s"_")
 
 
     if !isdir(dir_name)
@@ -316,7 +340,7 @@ include(pwd() *"/src/post_pred_fns.jl")
         if !isdir(dir_name)
 
 
-            mkdir(dir_name)
+            mkpath(dir_name)
 
         end
     end
@@ -350,9 +374,13 @@ include(pwd() *"/src/post_pred_fns.jl")
 
 
 
+    allow_real_switches = allow_switches
+    allow_realfun_switches = false
 
     # take details to generater Q vectors to map rates to right Q matrix, the Q matrix generated by this function is ignored (just using the simulation function, messy)
-    Q_par_matrix, rf_states, move_types, Q_index_vec, move_matrix = make_rf_par_matrix(nbiomes,max_range, 
+    Q_par_matrix, rf_states, move_types, Q_index_vec, move_matrix = make_rf_par_matrix(nbiomes,max_range,
+                                                                                    allow_real_switches     , 
+                                                                                    allow_realfun_switches,
                                                                                     allow_double_gains , 
                                                                                     allow_double_losses,
                                                                                     allow_single_gains ,
@@ -377,7 +405,20 @@ include(pwd() *"/src/post_pred_fns.jl")
     #sample rate parameters 
     rate_pars_sim=[round(rand(rate_prior_dists[i]),digits=4) for i in eachindex(move_types)]
     #rate_pars_sim=[0.5883, 0.6475, 5.2363, 1.7844, 1.4718]
-    Q_sim=fill_emptyQmat(zeros(size(Q_par_matrix)), rate_pars_sim, Q_index_vec, Q_par_matrix)
+
+   if N_rate_pars_off>0
+
+     off_pars =     sample(eachindex(rate_pars_sim), N_rate_pars_off; replace=false)
+
+     for rate_par in off_pars
+
+         rate_pars_sim[rate_par] = 0.0
+
+     end
+
+
+   end
+   Q_sim=fill_emptyQmat(zeros(size(Q_par_matrix)), rate_pars_sim, Q_index_vec, Q_par_matrix)
 
 
     #make cladogenetic probability matrix
@@ -388,8 +429,16 @@ include(pwd() *"/src/post_pred_fns.jl")
     ecological,
     allopatric)
 
+    if N_clado_pars_off>0
+        off_pars =     sample(1:3, N_clado_pars_off; replace=false)
+    else
+        off_pars = []
+    end
+   
+
+
     #modify to add additional free parameters, sample "true" cladogenetic paramaters
-    cladoPmat_sim, clado_probs_sim, split_index_vec, sub_index_vec, String_Clado_Mats, clado_prior_dists =make_clado_Pmat(rf_states, ecological, allopatric )
+    cladoPmat_sim, clado_probs_sim, split_index_vec, sub_index_vec, String_Clado_Mats, clado_prior_dists =make_clado_Pmat(rf_states, ecological, allopatric, off_pars)
 
 
     file_name=string(run_num)*"__"*join(string.(rate_pars_sim).*"_")*"_"*join(string.(clado_probs_sim[:,2]),"_")
@@ -397,34 +446,25 @@ include(pwd() *"/src/post_pred_fns.jl")
 
 
     #get tree from file then simulate data over the tree (including tip data, ancestral states, cladogenetic event types (subset or split) )
-    if Rtree==true
-
-        #rtree_file=("R_trees_anc_states_test/R_tree_"*string(ntips))
-        if !isdir(dir_name*"/sim_R_trees")
-            mkdir(dir_name*"/sim_R_trees")
-
-        end
-
-        rtree_file=("data/sim/R_trees/R_tree_"*string(ntips)*"tips/R_tree_"*string(sample(1:length(readdir("data/sim/R_trees/R_tree_"*string(ntips)*"tips/") ))))
-        #rtree_file="R_tree/R_tree_36"
-
-        tip_states, anc_states, clado_events, tree, brs, node_path = sim_rf_tips(rf_states, Q_sim, cladoPmat_sim, rtree_file, ntips)
-
-        #io = open((dir_name*"/"*"Rtrees"*".txt"), "a") 
-        #writedlm(io,([file_name*"\t"*join(string.(rtree_file).*"\t")]))                                                                                                                                                                                                                                                                                                                      
-        #close(io)  
-
-
-        io = open((dir_name*"/sim_R_trees/"*file_name*"___"* (split(rtree_file, "/")[2])  * ".txt"), "a") 
-        writedlm(io,([file_name*"\t"*join(string.(rtree_file).*"\t")]))                                                                                                                                                                                                                                                                                                                      
-        close(io)        
-
-
-    else 
+   if Rtree==true
+       #rtree_file=("R_trees_anc_states_test/R_tree_"*string(ntips))
+       if !isdir(dir_name*"/sim_R_trees")
+           mkpath(dir_name*"/sim_R_trees")
+       end
+       rtree_file=("data/sim/R_trees/R_tree_"*string(ntips)*"tips/R_tree_"*string(sample(1:length(readdir("data/sim/R_trees/R_tree_"*string(ntips)*"tips/") ))))
+       #rtree_file="R_tree/R_tree_36"
+       tip_states, anc_states, clado_events, tree, brs, node_path = sim_rf_tips(rf_states, Q_sim, cladoPmat_sim, rtree_file, ntips)
+       #io = open((dir_name*"/"*"Rtrees"*".txt"), "a") 
+       #writedlm(io,([file_name*"\t"*join(string.(rtree_file).*"\t")]))                                                                                                                                                                                                                                                                                                                      
+       #close(io)  
+       io = open((dir_name*"/sim_R_trees/"*file_name*"___"* (split(rtree_file, "/")[2])  * ".txt"), "a") 
+       writedlm(io,([file_name*"\t"*join(string.(rtree_file).*"\t")]))                                                                                                                                                                                                                                                                                                                      
+       close(io)        
+   else 
 
         tip_states, anc_states, clado_events, tree, brs, node_path = sim_rf_tips(rf_states, Q_sim, cladoPmat_sim, "NA", ntips)
 
-    end
+   end
 
 
     #convert tip states to state probabilities (each species has a vector of probabilities (n states long)
@@ -436,12 +476,12 @@ include(pwd() *"/src/post_pred_fns.jl")
 
     #save anc states from simulation
     if !isdir(dir_name*"/anc_states_sims")
-        mkdir(dir_name*"/anc_states_sims")
+        mkpath(dir_name*"/anc_states_sims")
 
     end
 
     if !isdir(dir_name*"/anc_aff_sims")
-        mkdir(dir_name*"/anc_aff_sims")
+        mkpath(dir_name*"/anc_aff_sims")
 
     end
 
@@ -454,7 +494,7 @@ include(pwd() *"/src/post_pred_fns.jl")
     #save anc clado events from simulation
 
     if !isdir(dir_name*"/anc_clados_sims")
-        mkdir(dir_name*"/anc_clados_sims")
+        mkpath(dir_name*"/anc_clados_sims")
 
     end
 
@@ -467,13 +507,14 @@ include(pwd() *"/src/post_pred_fns.jl")
     #save tip states events from simulation
 
     if !isdir(dir_name*"/tip_states_sims")
-        mkdir(dir_name*"/tip_states_sims")
+        mkpath(dir_name*"/tip_states_sims")
 
     end
 
     io = open((dir_name*"/tip_states_sims/"*file_name*"tip_states"*".txt"), "a") 
 
-        writedlm(io,([join(string.(tip_states).*"\t")]))                                                                                                                                                                                                                                                                                                                      
+        
+    writedlm(io,([join(string.(tip_states).*"\t")]))                                                                                                                                                                                                                                                                                                                      
     close(io)        
 
 
@@ -519,7 +560,7 @@ include(pwd() *"/src/post_pred_fns.jl")
 
 
     if !isdir(dir_name*"/logs")
-        mkdir(dir_name*"/logs")
+        mkpath(dir_name*"/logs")
 
     end
 
@@ -547,7 +588,7 @@ include(pwd() *"/src/post_pred_fns.jl")
 
 
 
-    join(string.(clado_events),"\t")
+ #   join(string.(clado_events),"\t")
 
 ##### run MCMC ######################################
 
@@ -563,7 +604,7 @@ include(pwd() *"/src/post_pred_fns.jl")
                 tree, 
                 log_filename, 
                 rate_tuning_par, clado_tuning_par,
-                rate_par_proposal_prob,
+                proposal_probs,
                 prior_only)
 
 
@@ -600,12 +641,12 @@ burnin=0.5
 
 #
 #if !isdir(dir_name*"/post_pred")
-#    mkdir(dir_name*"/post_pred")
+#    mkpath(dir_name*"/post_pred")
 #end
 #
 
 if !isdir(dir_name*"/anc_acc")
-    mkdir(dir_name*"/anc_acc")
+    mkpath(dir_name*"/anc_acc")
 end
 
 #RFBS_post_pred_log_filename=(dir_name*"/post_pred/"*par_chain_files[1]*"post_pred")

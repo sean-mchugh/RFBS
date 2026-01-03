@@ -1,5 +1,5 @@
 export LSF_DOCKER_VOLUMES="/storage1/fs1/michael.landis/Active:/storage1/fs1/michael.landis/Active"
-export JOBDIR="/storage1/fs1/michael.landis/Active/RFBS_RIS"
+export JOBDIR="/storage1/fs1/michael.landis/Active/Sean/RFBS"
 
 
 
@@ -57,13 +57,13 @@ do
 		
 		NAME="${DG[$x]}_${DL[$x]}_${SG[$x]}_${SL[$x]}_${bB[$x]}_${bRF[$x]}_${bGL[$x]}_${bDS[$x]}_${DEC[$x]}_${IncF[$y]}_${ExcF[$z]}_${AdjMAT[$a]}_${e}_${n}_${i}"	
 		bsub -G compute-michael.landis \
-		-cwd /storage1/fs1/michael.landis/Active/RFBS_RIS/ \
-		-o /storage1/fs1/michael.landis/Active/RFBS_RIS/Bvib_stdout/$NAME  \
+		-cwd /storage1/fs1/michael.landis/Active/Sean/RFBS/ \
+		-o /storage1/fs1/michael.landis/Active/Sean/RFBS/outfiles/emp/viburnum/stdout/$NAME  \
 		-J $NAME \
 		-q general \
 		-g /m.seanwmchugh/Bvib \
 		-n 1 -M 5GB -R "rusage [mem=5GB] span[hosts=1]" \
-		-a 'docker(sswiston/rb_tp:4)' /bin/bash /storage1/fs1/michael.landis/Active/RFBS_RIS/inf_Bvib.sh
+		-a 'docker(sswiston/rb_tp:4)' /bin/bash /storage1/fs1/michael.landis/Active/Sean/RFBS/scripts/shell_scripts/inf_Bvib.sh
 		
 		
 	done

@@ -41,5 +41,4 @@ RUN=${arr[16]}
 
 #julia scripts/analysis_scripts/RFBSsimestim_DECestim_comp_MCMC.jl ${DG} ${DL} ${SG} ${SL} ${bB} ${bRF} ${bGL} ${bDS} ${DEC} ${UP} ${SGCOV} ${SGPER} ${UT} ${RUN}
 
-julia scripts/analysis_scripts/anc_aff_accuracy_scripts/RFBSsimestim_comp_RJMCMC_RIS.jl ${DG} ${DL} ${SG} ${SL} ${bB} ${bRF} ${bGL} ${bDS} ${DEC} ${UP} ${SGCOV} ${SGPER} ${UT} ${PRIOR} ${PRIORONLY} ${TREE} ${RUN}
-julia scripts/analysis_scripts/anc_aff_accuracy_scripts/DECestim_comp_RJMCMC_RIS.jl ${DG} ${DL} ${SG} ${SL} ${bB} ${bRF} ${bGL} ${bDS} ${DEC} ${UP} ${SGCOV} ${SGPER} ${UT} ${PRIOR} ${PRIORONLY} ${TREE} ${RUN}
+julia scripts/analysis_scripts/RFBSsimestim_comp_RJMCMC_RIS.jl ${DG} ${DL} ${SG} ${SL} ${bB} ${bRF} ${bGL} ${bDS} ${DEC} ${UP} ${SGCOV} ${SGPER} ${UT} ${PRIOR} ${PRIORONLY} ${TREE} ${RUN}

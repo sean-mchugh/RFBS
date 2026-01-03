@@ -1,5 +1,5 @@
 cd(@__DIR__)
-
+#
 cd("../..")
 pwd()
 
@@ -24,35 +24,40 @@ ExponentialUtilities,
 
 #include files 
 include(pwd() *"/src/CladoProbMatrix_fns.jl")
-include(pwd() *"/src/make_rf_par_matrix_fns.jl")
+include(pwd() *"/src/make_rf_par_matrix_fns_switch.jl")
 include(pwd() *"/src/Tree_Util_fns.jl")
 include(pwd() *"/src/rf_sim_fns.jl")
 include(pwd() *"/src/rf_rate_clado_mcmc_fns.jl")
 include(pwd() *"/src/post_pred_fns.jl")
+include(pwd() *"/scripts/scratch_ws/RJ_update_mcmc_ws.jl")
 
 
 
 
-#which are non zero Q matrix elements
-allow_double_gains      = parse(Bool, ARGS[1])
-allow_double_losses     = parse(Bool, ARGS[2])
-allow_single_gains      = parse(Bool, ARGS[3])
-allow_single_losses     = parse(Bool, ARGS[4])
-by_biome                = parse(Bool, ARGS[5])
-by_rf                   = parse(Bool, ARGS[6])
-by_gainloss             = parse(Bool, ARGS[7])
-by_doublesingle         = parse(Bool, ARGS[8])
-DEC                     = parse(Bool, ARGS[9])
-include_fund            = parse(Bool, ARGS[10])
-use_forbidden_fund_vec  = parse(Bool, ARGS[11])
-use_adj_matrix          = parse(Bool, ARGS[12])
-biome_exc_treatment_ind = parse(Int, ARGS[13])
-biome_inc_treatment_ind = parse(Int, ARGS[14])
-run_num                 = parse(Int, ARGS[15])
+###which are non zero Q matrix elements
+#allow_double_gains      = parse(Bool, ARGS[1])
+#allow_double_losses     = parse(Bool, ARGS[2])
+#allow_single_gains      = parse(Bool, ARGS[3])
+#allow_single_losses     = parse(Bool, ARGS[4])
+#by_biome                = parse(Bool, ARGS[5])
+#by_rf                   = parse(Bool, ARGS[6])
+#by_gainloss             = parse(Bool, ARGS[7])
+#by_doublesingle         = parse(Bool, ARGS[8])
+#DEC                     = parse(Bool, ARGS[9])
+#include_fund            = parse(Bool, ARGS[10])
+#use_forbidden_fund_vec  = parse(Bool, ARGS[11])
+#use_adj_matrix          = parse(Bool, ARGS[12])
+#RJ_ana                  = parse(Bool, ARGS[13]) #if true use RJ update for clado probs, if false use MCMC update
+#RJ_clado                = parse(Bool, ARGS[14]) #if true use RJ update for clado probs, if false use MCMC update
+#
+#biome_exc_treatment_ind = parse(Int, ARGS[15])
+#biome_inc_treatment_ind = parse(Int, ARGS[16])
+#
+#run_num                 = parse(Int, ARGS[17])
 
 
 
-##if not running from shell script supply commands here (refer to shell script to see how we set these arguements up) 
+####if not running from shell script supply commands here (refer to shell script to see how we set these arguements up) 
 #allow_double_gains =true
 #allow_double_losses=false
 #allow_single_gains =true
@@ -61,18 +66,46 @@ run_num                 = parse(Int, ARGS[15])
 #by_rf              =true
 #by_gainloss        =true
 #by_doublesingle    =true
-#DEC                =false     
+#DEC                =true     
 #UP                 =0.1
 #SG                 =0.1
 #SGP                =0.1
 #uncertain_tips     =true
-#use_adj_matrix=true
+#use_adj_matrix     =true
 #use_forbidden_fund_vec=true
-#include_fund=true
-#biome_exc_treatment_ind=1
-#biome_inc_treatment_ind=2
+#include_fund          =false
+#biome_exc_treatment_ind=2
+#biome_inc_treatment_ind=1
 #run_num=1
 
+
+allow_double_gains      = true
+allow_double_losses     = false
+allow_single_gains      = true
+allow_single_losses     = true
+by_biome                = false
+by_rf                   = true
+by_gainloss             = true
+by_doublesingle         = true
+DEC                     = false
+include_fund            = false
+use_forbidden_fund_vec  = true
+use_adj_matrix          = true
+RJ_ana                  = true
+RJ_clado                = false
+
+biome_exc_treatment_ind = 2
+biome_inc_treatment_ind = 1
+
+run_num                 = 1
+
+
+RJ_ana                  = true #if true use RJ update for clado probs, if false use MCMC update
+RJ_clado                = false #if true use RJ update for clado probs, if false use MCMC update
+
+
+allow_real_switches    = true
+allow_realfun_switches = false
 
 
 data_dir= "data/emp/viburnum/"
@@ -103,6 +136,10 @@ if include_fund
 else
 
     viburnum_dat = readdlm( data_dir * "viburnum_sorted_rf_states_3b.txt", Int64)
+    viburnum_dat=readdlm(include_aff_dir  * biome_inc_treatment * "_incf_viburnum_sorted_rf_states_3b.txt", Int64)
+
+    viburnum_dat[(viburnum_dat.==1)] = 0
+
     if Fossil
         tree_file = data_dir*"out.1.t163.f5.mask_fossil_states.mcc.tre" #pollen fossil taxa
     else
@@ -120,7 +157,7 @@ biome_exc_treatment_vec = [
 #"3.biomes.germination.conservative"                              
 #"3.biomes.leafing.bold"                                          
 #"3.biomes.leafing.conservative"                                  
-"3.biomes.USDA"                                                  
+#"3.biomes.USDA"                                                  
 #"3.biomes.germination.only.germination.bold"                     
 #"3.biomes.germination.only.leafing.bold"                         
 #"3.biomes.germination.only.leafing.conservative"                 
@@ -135,11 +172,11 @@ biome_exc_treatment_vec = [
 #"3.biomes.leafing.bold.leafing.conservative"                     
 #"3.biomes.leafing.bold.USDA"                                     
 #"3.biomes.leafing.conservative.USDA"                             
-#"3.biomes.germination.only.germination.bold.leafing.bold"        
+"3.biomes.germination.only.germination.bold.leafing.bold"        
 #"3.biomes.germination.only.germination.bold.leafing.conservative"
 #"3.biomes.germination.only.germination.bold.USDA"                
 #"3.biomes.germination.only.leafing.bold.leafing.conservative"    
-#"3.biomes.germination.only.leafing.conservative.USDA"            
+"3.biomes.germination.only.leafing.conservative.USDA"            
 #"3.biomes.germination.bold.germination.conservative.USDA"        
 #"3.biomes.germination.conservative.leafing.conservative.USDA"    
 #"3.biomes.leafing.bold.leafing.conservative.USDA"           
@@ -197,22 +234,29 @@ else
 end
 
 
-iters                 =2000000
+if RJ_ana
+    rate_zero_switch=2.0
+else
+    rate_zero_switch=0.0
+end
+if RJ_clado
+    clado_zero_switch=2.0
+else
+    clado_zero_switch=0.0
+end
+iters                 =20000
+
+
 iter_trims        =iters/10000
 anc_state_sampling=iters/10000
 write_interval           =1000
 post_pred_iters         =10000
 post_pred_write_interval =1000
-
-
-rate_tuning_par=1.5
-clado_tuning_par=0.4
-
-
-#ntips=10
-
-ecological=true
-allopatric=true
+proposal_probs           = (rate_move = 10 , clado_move = 5 , rate_zero_switch = rate_zero_switch, clado_zero_switch = clado_zero_switch)
+rate_tuning_par          =1.5
+clado_tuning_par         =0.4
+ecological               =true
+allopatric               =true
 
 if DEC
 
@@ -225,7 +269,7 @@ Prior=0.5
 rate_prior_vec  = [Exponential(Prior)]
 #clado_prior_vec = [Beta(1,1)]
 
-rate_par_proposal_prob=0.8
+#rate_par_proposal_prob=0.8
 
 clado_types=["sub_split"]
 
@@ -280,7 +324,7 @@ end
 #end
 
 
-dir_name = "outfiles/emp/viburnum/" * "Bvib_"* string(nbiomes_g[1])*"nB_"*prior_label*"_"* string(iters)
+dir_name = "outfiles/emp/viburnum/resub/" * "Bvib_"* string(nbiomes_g[1])*"nB_"*prior_label*"_"* string(iters)
 
 
 if prior_only==true
@@ -305,8 +349,6 @@ if include_fund==true
     dir_name=dir_name*"_incf"
     dir_name=dir_name * "_" * biome_inc_treatment
     
-
-
 end
 
 
@@ -346,6 +388,11 @@ end
 if allow_single_losses==true
     dir_name=dir_name*"_1l"
 end
+
+if allow_real_switches==true
+    dir_name=dir_name*"_2sw"
+end
+
 #if single_par==true
 #    dir_name= dir_name*"_1p"
 #end
@@ -369,6 +416,13 @@ end
 
 if Fossil==true
     dir_name=dir_name*"_Foss"
+end
+
+if RJ_ana==true
+    dir_name=dir_name*"_RJa"
+end
+if RJ_clado==true
+    dir_name=dir_name*"_RJc"
 end
 
 dir_name = replace(dir_name,r" "  => s"_")
@@ -418,8 +472,12 @@ nbiomes=nbiomes_g[1]
 
 max_range=max_range_g[1]
 
- # take details to generater Q fectors to map rates to right Q matrix, the Q matrix generated by this function is ignored (just using the simulation function, messy)
-par_matrix, rf_states, move_types, index_vec, move_matrix = make_rf_par_matrix(nbiomes,max_range, 
+allow_realfun_switches = false
+
+# take details to generater Q vectors to map rates to right Q matrix, the Q matrix generated by this function is ignored (just using the simulation function, messy)
+par_matrix, rf_states, move_types, index_vec, move_matrix = make_rf_par_matrix(nbiomes,max_range,
+                                                                                allow_real_switches     , 
+                                                                                allow_realfun_switches,
                                                                                 allow_double_gains , 
                                                                                 allow_double_losses,
                                                                                 allow_single_gains ,
@@ -428,8 +486,23 @@ par_matrix, rf_states, move_types, index_vec, move_matrix = make_rf_par_matrix(n
                                                                                 by_rf              ,
                                                                                 by_gainloss        ,
                                                                                 by_doublesingle    ,
-                                                                                DEC)
+                                                                                DEC )#,absorb_states)
 
+
+#
+#
+# # take details to generater Q fectors to map rates to right Q matrix, the Q matrix generated by this function is ignored (just using the simulation function, messy)
+#par_matrix, rf_states, move_types, index_vec, move_matrix = make_rf_par_matrix(nbiomes,max_range, 
+#                                                                                allow_double_gains , 
+#                                                                                allow_double_losses,
+#                                                                                allow_single_gains ,
+#                                                                                allow_single_losses,
+#                                                                                by_biome           ,
+#                                                                                by_rf              ,
+#                                                                                by_gainloss        ,
+#                                                                                by_doublesingle    ,
+#                                                                                DEC)
+#
 
 
 
@@ -559,17 +632,25 @@ log_filename=(dir_name*"/"*file_name*"_log")
 
 
 
-    realfun_mcmc(start_rates, clado_probs_start,
-                 iters, iter_trims, write_interval,
+    realfun_mcmc(start_rates,                                              
+                clado_probs_start,
+                 iters, 
+                 iter_trims,
+                  write_interval,
                  anc_state_sampling, 
-                 par_matrix, index_vec, move_types,rate_prior_dists,
-                cladoPmat_unpar, clado_prior_dists, 
+                 par_matrix, 
+                 index_vec,
+                  move_types,
+                  rate_prior_dists,
+                 cladoPmat_unpar,
+                 clado_prior_dists, 
                  rf_states, 
                  tip_probs, 
                  tree, 
                  log_filename,
-                 rate_tuning_par, clado_tuning_par,
-                 rate_par_proposal_prob, 
+                 rate_tuning_par, 
+                 clado_tuning_par,
+                 proposal_probs, 
                  prior_only,
                  false )
 
