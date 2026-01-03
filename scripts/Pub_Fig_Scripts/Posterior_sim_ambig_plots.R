@@ -313,7 +313,21 @@ calc_HPD_ci=function(n, p){
          
               
        # dir_names=c("saved_BSim_runs/Draft_2/BSim_RFBS_DEC_compPO_50t_3nB_Exp0p5iter_500000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds")           
-                
+        
+      
+    dir_names=c(   "/Volumes/michael.landis/Active/Sean/RFBS/outfiles/sim/resub/coverage/BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_Ncladooff_0_Nrateoff_0_f2n_clado_Rtre_2g_2l_1g_1l_2sw_dr_rf_gl_ds",
+                   "/Volumes/michael.landis/Active/Sean/RFBS/outfiles/sim/resub/ambig_data/BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_Ncladooff_0_Nrateoff_0_f2n_clado_Rtre_2g_2l_1g_1l_2sw_dr_unce[1.0][0.33][0.25]_rf_gl_ds",
+                   # "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.33][0.5]_rf_gl_ds",
+                   "/Volumes/michael.landis/Active/Sean/RFBS/outfiles/sim/resub/ambig_data/BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_Ncladooff_0_Nrateoff_0_f2n_clado_Rtre_2g_2l_1g_1l_2sw_dr_unce[1.0][0.33][0.75]_rf_gl_ds",
+                   # "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.33][1.0]_rf_gl_ds",
+                   "/Volumes/michael.landis/Active/Sean/RFBS/outfiles/sim/resub/ambig_data/BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_Ncladooff_0_Nrateoff_0_f2n_clado_Rtre_2g_2l_1g_1l_2sw_dr_unce[1.0][0.66][0.25]_rf_gl_ds/",
+                   # "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.66][0.5]_rf_gl_ds",
+                   "/Volumes/michael.landis/Active/Sean/RFBS/outfiles/sim/resub/ambig_data/BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_Ncladooff_0_Nrateoff_0_f2n_clado_Rtre_2g_2l_1g_1l_2sw_dr_unce[1.0][0.66][0.75]_rf_gl_ds/",
+                   # "BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_f2n_clado_Rtre_2g_1g_1l_dr_unce[1.0][0.66][1.0]_rf_gl_ds",
+                   "/Volumes/michael.landis/Active/Sean/RFBS/outfiles/sim/resub/ambig_data/BSim_RFBS_DEC_comp150t_3nB_Exp1p0iter_1000000_Ncladooff_0_Nrateoff_0_f2n_clado_Rtre_2g_2l_1g_1l_2sw_dr_unce[1.0][1.0][1.0]_rf_gl_ds/"
+    )
+    
+        
     dir_labels=c("no missing data",
                   "-2 ambiguous states of a maximum of 3 in 25% tips",
                   #"-2 ambiguous states of a maximum of 3 in 50% tips",
@@ -324,6 +338,17 @@ calc_HPD_ci=function(n, p){
                   "-1 ambiguous state of a maximum of 3 in 75% tips",
                   #"-1 ambiguous state of a maximum of 3 in 100% tips",
                  "all ambiguous states in 100% tips")
+    
+    label=c("No Ambiguous Data",
+            "66% Ambiguity Reduction in 25% Tips",
+            #"-2 ambiguous states of a maximum of 3 in 50% tips",
+            "66% Ambiguity Reduction in 75% Tips",
+            #  "-2 ambiguous states of a maximum of 3 in 100% tips",
+            "33% Ambiguity Reduction in  25% Tips",
+            #"-1 ambiguous state of a maximum of 3 in 50% tips",
+            "33% Ambiguity Reduction in 75% Tips",
+            #"-1 ambiguous state of a maximum of 3 in 100% tips",
+            "All Ambiguous Data in all Tips")
     
      
     
@@ -337,7 +362,7 @@ calc_HPD_ci=function(n, p){
     
     prior_dir="BSim_RFBS_DEC_compPO_50t_3nB_Exp0p5iter_500000_f2n_clado_Rtre_2g_1g_1l_dr_rf_gl_ds"
     #if running files from HPC
-    setwd("/Volumes/michael.landis/Active/RFBS_RIS/")
+    #setwd("Volumes/michael.landis/Active/RFBS/")
     
     workdir=getwd()
     
@@ -393,6 +418,9 @@ log_dirs     =  lapply(dir_names, function(dir) paste(dir, "/logs", sep=""))
 HPD_list=list()
 ESS_list=list()
 n_good_runs=list()
+
+c(1,3,5,6)
+#1:length(dir_names)
 
 for (dir in 1:length(dir_names)){
   
@@ -497,7 +525,7 @@ for (dir in 1:length(dir_names)){
         npars=(ncol(test[[1]])-5)/2
         
         #5:(4+) without clado par, 6:(5+)
-        chain_ind_vec=6:(5+npars)
+        chain_ind_vec=c(6:12, 20:22)
         
         chain_list=colnames(test[[1]])[chain_ind_vec]
         
@@ -527,6 +555,7 @@ for (dir in 1:length(dir_names)){
     
     
   }  
+  
   print(round(rbind(isin_HPD,colSums(isin_HPD)/nrow(isin_HPD)),digits = 4))
   
   #print(colSums(isin_HPD)/nrow(isin_HPD))
@@ -563,7 +592,9 @@ for (dir in 1:length(dir_names)){
 {
   par_names=c(
     expression(italic(l)[1 %->% 0]), 
+    expression(italic(l)[2 %->% 0]), 
     expression(italic(g)[0 %->% 1]),
+    expression(italic(s)[2]),
     expression(italic(l)[2 %->% 1]),
     expression(italic(g)[0 %->% 2]),
     expression(italic(g)[1 %->% 2]),
@@ -572,19 +603,20 @@ for (dir in 1:length(dir_names)){
     expression(italic(e)[i])
   )
   
-  ESS_rows=1:5
+  ESS_rows=1:6
   
   
   
   
   
-  pdf(paste(workdir,"/", "3_150tip_ambig.pdf", sep=""), width = 30, height = 20)
+  pdf(paste("~/Projects/RFBS-Main/outfiles/sim_plots/resub/ambig_data/", "3_150tip_ambig.pdf", sep=""), width = 30, height = 20)
   #par(mfrow=c(2,2))
-  layout_matrix= createLayoutMatrix(Nrow = 1, Ncol = 8, blockRows = length(dir_labels), blockCols = 1, gridFillOrder  = "byrow", blockFillOrder = "byrow")     
+  layout_matrix= createLayoutMatrix(Nrow = 1, Ncol = 10, blockRows = length(dir_labels), blockCols = 1, gridFillOrder  = "byrow", blockFillOrder = "byrow")     
   layout(layout_matrix)
   
   # par(oma=c(0,0,3,0));  
-  
+  c(1,3,5,6)
+  #length(sim_pars_total_list)
   for (dir in 1:length(sim_pars_total_list)){
     
     # pdf(paste(workdir,"/",dir_name,"/",dir_name, "_posterior_median_lineplot.pdf", sep=""))
@@ -648,7 +680,7 @@ for (dir in 1:length(dir_names)){
       
       for (i in 1:ncol(post_median_total)){
         
-        if(i>5){
+        if(i>7){
           
           max_val= 1
           
@@ -660,7 +692,9 @@ for (dir in 1:length(dir_names)){
           
         }else{
           
-          max_val=max(unlist(post_median_total))
+          max_val= max(unlist(lapply(post_median_total_list, function(par_it) max(unlist(par_it[-1,])))))
+          
+         
           
           max=as.integer(max_val+max_val*0.1)
           
@@ -696,6 +730,11 @@ for (dir in 1:length(dir_names)){
         }
         points(sim_pars_total[good_rows,i], post_median_total[good_rows,i])
         
+        # --- NEW: LOESS SMOOTHING LINE ---
+        lo <- loess(post_median_total[good_rows,i] ~ sim_pars_total[good_rows,i])
+        xs <- seq(min(sim_pars_total[good_rows,i]), max(sim_pars_total[good_rows,i]), length.out = 200)
+        lines(xs, predict(lo, xs), col="darkorange", lwd=3)
+        # ---------------------------------
         
         
         arrows(sim_pars_total[good_rows,i], lower_HPD[good_rows,i], sim_pars_total[good_rows,i], upper_HPD[good_rows,i], length=0.01, angle=90, code=3,col =HPD_colors[isin_HPD[good_rows,i]+1] )
@@ -723,74 +762,3 @@ for (dir in 1:length(dir_names)){
   
 }
 
-#post_median_total/
-
-
-#######
-
-ESS_total=rbind(ESS_total,ESS)
-
-HPD_total=rbind(HPD_total,HPD)
-isin_HPD_total=rbind(isin_HPD_total,isin_HPD)
-post_mean_total=rbind(post_mean_total,post_mean)
-post_median_total=rbind(post_median_total,post_median)
-sim_pars_total=rbind(sim_pars_total,sim_pars)
-colSums(isin_HPD_total)/nrow(isin_HPD_total)
-
-
-plot(pbtree(n = 3), )
-
-
-
-
-
-
-#if((i-1)%%ncol_plots==0){
-#  
-#  if((i)>(nrow_plots*ncol_plots-ncol_plots)){
-#    
-#    plot(c(0, max), c(0, maxy), main=par_names[[i]],type = "n",xlab = "True Simulating Pars", ylab="Posterior Median", cex.main=2.5)
-#    
-#  }else{
-#    
-#    plot(c(0, max), c(0, maxy), main=par_names[[i]],type = "n", xlab="", ylab="Posterior Median",cex.main=2.5)
-#    
-#  }
-#  
-#}else{
-#  
-#  if(i>(nrow_plots*ncol_plots-ncol_plots)){
-#    
-#    plot(c(0, max), c(0, maxy), main=par_names[[i]],type = "n",xlab = "True Simulating Pars", ylab="", cex.main=2.5)
-#    
-#  }else{
-#    
-#    plot(c(0, max), c(0, maxy), main=par_names[[i]],type = "n", xlab = "", ylab="", cex.main=2.5)
-#    
-#  }
-#  
-
-
-#}
-
-####messed up file naming when adding clado par, use as below
-#
-#file_list=list.files(dir_name)
-#prior_file_list=list.files(prior_dir)
-#
-#run_list=file_list[grep("_log.txt",unlist(file_list),fixed=FALSE)]
-#
-#prior_run=prior_file_list[grep("__log.txt",unlist(prior_file_list),fixed=FALSE)]
-#prior_test=read.table(paste(prior_dir,prior_run, sep="/"), header = T)
-#
-#
-#sim_pars_string_ = gsub("_log.txt*","",unlist(run_list),fixed=FALSE)
-#sim_pars_strings = gsub("\t","",unlist(sim_pars_string_),fixed=FALSE)
-#
-#sim_pars_strings_unique=unique(sim_pars_strings)
-#
-#
-#sim_pars=as.numeric(unlist(str_split(sim_pars_strings_unique, "_")))
-#
-#sim_pars=do.call(rbind,lapply(sim_pars_strings_unique, function(run)  as.numeric(unlist(str_split(run, "_")))))
-#

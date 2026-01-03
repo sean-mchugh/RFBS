@@ -12,6 +12,35 @@ match_string_elements_to_string_vec <- function(string_vec, string_pieces, name_
   return(scores_list)
 }
 
+permutation_counts <- function(df, 
+                               cols,
+                               include_zero = FALSE,
+                               keep_missing = TRUE) {
+  stopifnot(all(cols %in% colnames(df)))
+  library(data.table)
+  
+  ## 1.  Count every observed pattern ---------------------------------------
+  DT      <- as.data.table(df[, cols, drop = FALSE])
+  counts  <- DT[, .N, by = cols]                # N == frequency
+  setorder(counts, -N)                          # biggest first
+  
+  ## 2.  Add unobserved permutations if requested ---------------------------
+  if (keep_missing) {
+    grid <- as.data.table(expand.grid(rep(list(c(0L, 1L)), length(cols)),
+                                      KEEP.OUT.ATTRS = FALSE))
+    setnames(grid, cols)
+    counts <- merge(grid, counts, by = cols, all.x = TRUE)
+    counts[is.na(N), N := 0L]
+  }
+  
+  ## 3.  Optionally drop the all-zero row -----------------------------------
+  if (!include_zero) {
+    counts <- counts[rowSums(counts[, ..cols]) > 0]
+  }
+  
+  counts[]
+}
+
 
 library(stringr)
 library(dplyr)
@@ -49,7 +78,7 @@ RFBS_dir_names=
     "Bvib_3nB_LN_0_p5_1000000_excf_eco_allo_clado_2g_1g_1l_rf_gl_ds",
     "Bvib_3nB_LN_0_p5_1000000_incf_eco_allo_clado_2g_1g_1l_rf_gl_ds",
     "Bvib_3nB_LN_0_p5_1000000_incf_excf_eco_allo_clado_2g_1g_1l_rf_gl_ds")
-         
+
 RFBS_dir_names= 
   c( "Bvib_3nB_Exp0p5_10000000_admat_eco_allo_clado_2g_1g_1l_rf_gl_ds",
      "Bvib_3nB_Exp0p5_10000000_admat_excf_eco_allo_clado_2g_1g_1l_rf_gl_ds",
@@ -127,8 +156,8 @@ RFBS_dir_names=
       "Bvib_3nB_Exp0p5_3000000_admat_excf_3.biomes.leafing.conservative_eco_allo_clado_2g_1g_1l_rf_gl_ds",
       "Bvib_3nB_Exp0p5_3000000_admat_excf_3.biomes.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_rf_gl_ds",
       "Bvib_3nB_Exp0p5_3000000_admat_excf_3.biomes.USDA_eco_allo_clado_2g_1g_1l_rf_gl_ds"
-      )
-  
+  )
+
 
 
 #RFBS_dir_names= 
@@ -165,6 +194,8 @@ RFBS_dir_names=
 #  )
 
 RFBS_dir_names = c(
+  "Bvib_3nB_Exp0p5_1000000_PO_Foss_noincf_cons_noexcf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
+  #"Bvib_3nB_Exp0p5_1000000_PO_Foss_noincf_cons_noexcf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
   "Bvib_3nB_Exp0p5_3000000_Foss_admat_incf_bold_excf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
   "Bvib_3nB_Exp0p5_3000000_Foss_admat_incf_bold_excf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss_RJa",
   "Bvib_3nB_Exp0p5_3000000_Foss_admat_incf_bold_excf_3.biomes.germination.only.leafing.conservative.USDA_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
@@ -233,15 +264,26 @@ RFBS_dir_names = c(
 )
 
 
-RFBS_dir_names = RFBS_dir_names[grep("RJa", RFBS_dir_names )] 
+
+RFBS_dir_names = RFBS_dir_names[c(grep("RJa", RFBS_dir_names ))] 
 
 #new_RFBS_dir_names=  list.files() [(grep("Bvib_3nB_Exp0p5_3000000",list.files()  ))]
 #old_RFBS_dir_names=  list.files() [(grep("Bvib_3nB_Exp0p5_10000000",list.files()  ))][c( 5,1,6,7, 2,3,8,4)]
 
 #RFBS_dir_names=c(old_RFBS_dir_names, new_RFBS_dir_names)
 
-evidence_vec=c("germination.only" ,"germination.conservative" ,"germination.bold", "leafing.conservative", "leafing.bold","USDA", "admat", "_incf","_excf"  )
-name_vec=c("G_O" ,"G_C" ,"G_B", "L_C", "L_B","USDA", "A","I", "E" )
+#"excf_3.biomes.germination.only.leafing.conservative.USDA"
+#"excf_3.biomes.germination.only.germination.bold.leafing.bold"
+#
+#
+#evidence_vec=c("germination.only" ,"germination.conservative" ,"germination.bold", "leafing.conservative", "leafing.bold","USDA", "admat", "_incf_bold", "_incf_cons","_excf"  )
+#name_vec=c("G_O" ,"G_C" ,"G_B", "L_C", "L_B","USDA", "A", "Ib", "Ic", "E" )
+
+
+evidence_vec=c( "Bvib_3nB_Exp0p5_1000000_PO_Foss_noincf_cons_noexcf_3.biomes.germination.only.germination.bold.leafing.bold_eco_allo_clado_2g_1g_1l_2sw_rf_gl_ds_Foss",
+                "admat", "_incf_bold", "_incf_cons", "_excf_3.biomes.germination.only.germination.bold.leafing.bold", "_excf_3.biomes.germination.only.leafing.conservative.USDA"  )
+name_vec=c("Prior", "A", "Ib", "Ic", "Eb", "Ec" )
+
 
 RFBS_dir_names_sort=sort(RFBS_dir_names)
 
@@ -254,6 +296,7 @@ process_string <- function(x) {
   x <- gsub("_", "", x)   
   return(x)
 }
+
 
 # Apply the custom function to each element in the list using sapply or lapply
 #RFBS_legend_names <- sapply(RFBS_legend_names, process_string)
@@ -274,70 +317,43 @@ process_string <- function(x) {
 
 
 RFBS_legend_names = match_string_elements_to_string_vec(string_vec    = RFBS_dir_names_sort, 
-                                                       string_pieces = evidence_vec  , 
-                                                       name_vec)
+                                                        string_pieces = evidence_vec  , 
+                                                        name_vec)
+
+RFBS_legend_names[RFBS_legend_names == ""] = "None"
 
 #RFBS_legend_order = c(9, 5,1,6,7, 2,3,8,4)
 
 # Flatten the list into a character vector
 RFBS_legend_names <- unlist(RFBS_legend_names)
 
-new_RFBS_runs_df=cbind(RFBS_legend_names[9:length(RFBS_legend_names)], RFBS_dir_names_sort[9:length(RFBS_dir_names_sort)])
+RFBS_legend_names  = gsub(".", "_", RFBS_legend_names, fixed = T )
 
-new_RFBS_runs_df=cbind(RFBS_legend_names, RFBS_dir_names_sort)
+new_RFBS_runs_df = cbind(RFBS_legend_names, RFBS_dir_names_sort)
 
-#new_RFBS_runs_df=cbind(RFBS_legend_names, RFBS_dir_names_sort)
-
-# Sort by the number of dots (which corresponds to number of components after split) and then alphabetically
-
-new_sorted_RFBS_jobs_df <- new_RFBS_runs_df[order(
-  sapply(new_RFBS_runs_df[,1], function(x) length(strsplit(x, "\\.")[[1]])),
-  new_RFBS_runs_df[,1]
-),]
+new_RFBS_runs_df = new_RFBS_runs_df[!duplicated(new_RFBS_runs_df[,1]), ]
 
 
-old_RFBS_runs_df=cbind(RFBS_legend_names[1:8], RFBS_dir_names_sort[1:8])
+RFBS_treatments_sorted=c("Prior", "None", "A", "Ic","Ib", "Ec", "Eb", "A_Ic", "A_Ib", "A_Ec", "A_Eb","Ic_Ec", "Ic_Eb", "Ib_Ec", "Ib_Eb", "A_Ic_Ec", "A_Ic_Eb", "A_Ib_Ec", "A_Ib_Eb")
 
-RFBS_legend_names
+sorted_RFBS_runs_df= new_RFBS_runs_df[match(RFBS_treatments_sorted,new_RFBS_runs_df[,1] ) , ]
 
-# Sort by the number of dots (which corresponds to number of components after split) and then alphabetically
+RFBS_dir_names = sorted_RFBS_runs_df[-1,2]
+RFBS_Prior_dir = sorted_RFBS_runs_df[1,2]
 
-old_sorted_RFBS_jobs_df <- old_RFBS_runs_df[order(
-  sapply(old_RFBS_runs_df[,1], function(x) length(strsplit(x, "\\.")[[1]])),
-  old_RFBS_runs_df[,1]
-),]
+RFBS_legend_names = sorted_RFBS_runs_df[-1,1]
 
 
-old_RFBS_legend_names =match_string_elements_to_string_vec(string_vec    = old_sorted_RFBS_jobs_df[,1], 
-                                                       string_pieces = c("E", "A", "I") , 
-                                                       c("Old_Exc", "A", "Old_I"))
+setwd("/Volumes/michael.landis/Active/Sean/RFBS/outfiles/emp/viburnum/resub")
 
+workdir="/Volumes/michael.landis/Active/Sean/RFBS/outfiles/emp/viburnum/resub/"
 
-
-RFBS_legend_names=c(old_RFBS_legend_names, new_sorted_RFBS_jobs_df[,1])
-RFBS_dir_names = c(old_sorted_RFBS_jobs_df[,2], new_sorted_RFBS_jobs_df[,2])
-
-#RFBS_legend_names=c(new_sorted_RFBS_jobs_df[,1])
-#RFBS_dir_names = c(new_sorted_RFBS_jobs_df[,2])
-
-
-#RFBS_legend_names[[1]] = "Obs_only"
-#RFBS_legend_names[[2]] = 
-RFBS_legend_names[[length(RFBS_legend_names)+1]] = "Prior_only"
-
-
-RFBS_Prior_dir="Bvib_3nB_Exp0p5_10000000_PO_admat_incf_excf_eco_allo_clado_2g_1g_1l_rf_gl_ds"
-
-DEC_dir_names=  "Bvib_3nB_Exp0p5_1000000_DEC_eco_clado_2g_2l_gl"
-
-
-setwd("/Volumes/michael.landis/Active/RFBS_RIS")
-
-workdir=getwd()
+RFBS_dir_names = paste0(workdir, RFBS_dir_names)
+RFBS_Prior_dir = paste0(workdir, RFBS_Prior_dir)
 
 #dir_name=dir_names[[1]]
 
-tree=read.tree("viburnum_data_files/viburnum_sorted.tre")
+tree=read.tree("/Volumes/michael.landis/Active/Sean/RFBS/data/emp/viburnum_data_files/viburnum_sorted.tre")
 
 rescale=max(nodeHeights(tree))
 tree$edge.length
@@ -348,740 +364,355 @@ sim_dat=F
 post_dist=list()
 i=0
 
+
+
+
+t_col <- function(color, percent = 50, name = NULL) {
+  #      color = color name
+  #    percent = % transparency
+  #       name = an optional name for the color
   
-{
-    
-    t_col <- function(color, percent = 50, name = NULL) {
-      #      color = color name
-      #    percent = % transparency
-      #       name = an optional name for the color
-      
-      ## Get RGB values for named color
-      rgb.val <- col2rgb(color)
-      
-      ## Make new color using input color as base and alpha set by transparency
-      t.col <- rgb(rgb.val[1], rgb.val[2], rgb.val[3],
-                   max = 255,
-                   alpha = (100 - percent) * 255 / 100,
-                   names = name)
-      
-      ## Save the color
-      invisible(t.col)
-    }
-    
-    
-   # dir_name=dir_names[[i]]
-    
-    RFBS_file_list=lapply(RFBS_dir_names, function(dir) list.files(dir))
-    DEC_file_list=lapply(DEC_dir_names, function(dir) list.files(dir))
-    
-    prior_file_list=list.files(RFBS_Prior_dir)
-    
-    
-    #run_list=file_list[grep("__log.txt",unlist(file_list),fixed=FALSE)]
-    #
-    #
-    prior_run=prior_file_list[grep("__log.txt",unlist(prior_file_list),fixed=FALSE)]
-    #prior_test=read.table(paste(prior_dir,prior_run, sep="/"), header = T)
-    #
-    RFBS_run_files=lapply(RFBS_file_list, function(file_list) file_list[grep("_log$",unlist(file_list),fixed=FALSE)])
-   RFBS_prior_run=prior_file_list[grep("_log$",unlist(prior_file_list),fixed=FALSE)]
-    RFBS_prior_test=read.table(paste(RFBS_Prior_dir,RFBS_prior_run[[1]], sep="/"), header = T)
-    
+  ## Get RGB values for named color
+  rgb.val <- col2rgb(color)
+  
+  ## Make new color using input color as base and alpha set by transparency
+  t.col <- rgb(rgb.val[1], rgb.val[2], rgb.val[3],
+               max = 255,
+               alpha = (100 - percent) * 255 / 100,
+               names = name)
+  
+  ## Save the color
+  invisible(t.col)
+}
 
-    DEC_run_files=DEC_file_list[[1]][grep("_log$",unlist(DEC_file_list),fixed=FALSE)]
-    #DEC_prior_run=prior_file_list[grep("_log$",unlist(prior_file_list),fixed=FALSE)]
-    #DEC_prior_test=read.table(paste(prior_dir,prior_run, sep="/"), header = T)
-    
 
-    
-    burnin=0.5
+# dir_name=dir_names[[i]]
+
+RFBS_file_list=lapply(RFBS_dir_names, function(dir) list.files(dir))
+#DEC_file_list=lapply(DEC_dir_names, function(dir) list.files(dir))
+
+prior_file_list=list.files(RFBS_Prior_dir)
+#
+prior_run=prior_file_list[grep("__log.txt",unlist(prior_file_list),fixed=FALSE)]
+#prior_test=read.table(paste(prior_dir,prior_run, sep="/"), header = T)
+#
+RFBS_run_files=lapply(RFBS_file_list, function(file_list) file_list[grep("_log$",unlist(file_list),fixed=FALSE)])
+RFBS_prior_run=prior_file_list[grep("_log$",unlist(prior_file_list),fixed=FALSE)]
+RFBS_prior_test=read.table(paste(RFBS_Prior_dir,RFBS_prior_run[[1]], sep="/"), header = T)
+
+burnin=0.5
 ####make rfbs post objects#####    
-    
-    RFBS_chains_full=lapply(1:length(RFBS_dir_names), function(dir) lapply(RFBS_run_files[[dir]], function(run) read.table(paste(RFBS_dir_names[[dir]],run, sep="/"), header = T) ))
-    RFBS_chains=RFBS_chains_full
-    npars=(ncol(RFBS_chains[[1]][[1]] )-4)/2
-    chain_ind_vec=6:(5+npars)
-    chain_list=colnames(RFBS_chains[[1]][[1]])[chain_ind_vec]
-    RFBS_post_dist=list()
-  
-    {
-    pdf(paste("EXP_0p5_bvib_RFBS_DEC_traces.pdf", sep=""),width = 8,height = 15)
-    
-      
-for (dir in (1:length(RFBS_chains))[-106]){
-  
-  print(dir)
-  
-    RFBS_post_dist[[dir]]=list()
-  
-    for (run in 1:length(RFBS_chains[[dir]])){
-      
-      
-      
-      chain_length=nrow(RFBS_chains_full[[dir]][[run]])
-      
-      RFBS_chains[[dir]][[run]] = RFBS_chains_full[[dir]][[run]][(chain_length*burnin):chain_length,]
-      
+######this loads the chains takes awhile and need connection to RIS
+RFBS_chains_full=lapply(1:length(RFBS_dir_names), function(dir) lapply(RFBS_run_files[[dir]], function(run) read.table(paste(RFBS_dir_names[[dir]],run, sep="/"), header = T) ))
+RFBS_chains_prior= lapply(RFBS_run_files[[1]], function(run) read.table(paste(RFBS_dir_names[[1]],run, sep="/"), header = T) )
 
-      
-    }
-      
-    trace_cols <- distinctColorPalette(length(RFBS_chains[[dir]]))
-    
-    par(mfrow=c(3,2))
-    
-      
-    for (chain in 1:length(chain_ind_vec)){
-    
-      
-     # plot(RFBS_chains[[dir]][[run]][,chain_list[[chain]]]*rescale, type = "l", xlab = "", ylab="")
+###############################################
+
+
+{
+  
+  RFBS_chains=RFBS_chains_full
+  npars=19 #(ncol(RFBS_chains[[1]][[1]] )-4)/2
+  
+  
+  #chain_ind_vec=6:(5+npars)
+  
+  #chain_ind_vec = c(6:11, 18:20)
+  chain_ind_vec = c(6:20)
+  
+  chain_list=colnames(RFBS_chains[[1]][[1]])[chain_ind_vec]
+  RFBS_post_dist=list()
+  
+  {
+    for (dir in (1:length(RFBS_chains))){
+      print(dir)
+      RFBS_post_dist[[dir]]=list()
       for (run in 1:length(RFBS_chains[[dir]])){
-    #    lines(RFBS_chains[[dir]][[run]][,chain_list[[chain]]], col=trace_cols[[run]])
+        chain_length=nrow(RFBS_chains_full[[dir]][[run]])
+        #RFBS_chains[[dir]][[run]] = RFBS_chains_full[[dir]][[run]][(chain_length*burnin):chain_length,]
+        RFBS_chains[[dir]][[run]] = RFBS_chains_full[[dir]][[run]][5,]
+        
       }
-    
-
-      RFBS_post_dist[[dir]][[chain_list[[chain]]]]=unlist(lapply( 1:length(RFBS_chains[[dir]]), function(run) RFBS_chains[[dir]][[run]][,chain_ind_vec[[chain]] ]))
-    
-      #lines(RFBS_prior_test[[chain_list[[chain]]]], col=t_col(3, 90))
-      
-   # post_dist[[dir]][[chain_list[[chain]]]]=unlist(lapply(test, function(run) run[,chain_ind_vec[[chain]] ]))
-    
+      for (chain in 1:length(chain_ind_vec)){
+        RFBS_post_dist[[dir]][[chain_list[[chain]]]]=unlist(lapply( 1:length(RFBS_chains[[dir]]), function(run) RFBS_chains[[dir]][[run]][,chain_ind_vec[[chain]] ]))
+      }
     }
-    
-    #title(  paste(RFBS_legend_names[[dir]]), line = -2, outer = TRUE)
-    
-      
+  }
+}
 
-     # post_dist[[dir]][[chain_list[[chain]]]]=unlist(lapply( RFBS_chains[[dir]], function(chain) run[,chain_ind_vec[[run]]]))
-      
-      
-}
-    
-  dev.off()  
-  
-  
-  
-    }
-    
-#######make DEC posterior objects    
-# 
-#    DEC_chains_full=lapply( 1:length(DEC_run_files), function(run) read.table(paste(DEC_dir_names,DEC_run_files[[run]], sep="/"), header = T) )
-#    DEC_chains=DEC_chains_full
-#    DEC_npars=(ncol(DEC_chains[[1]] )-4)/2
-#    DEC_chain_ind_vec=6:(5+DEC_npars)
-#    DEC_chain_list=colnames(DEC_chains[[1]])[DEC_chain_ind_vec]
-#    DEC_post_dist=list()
-#    
-#    
-#    
-#dir=1
-#    #  DEC_post_dist[[dir]]=list()
-#      
-#      for (dir in 1:length(DEC_chains)){
-#        
-#        DEC_post_dist=list()
-#        
-#        for (run in 1:length(DEC_chains)){
-#          
-#          
-#          
-#          chain_length=nrow(DEC_chains_full[[run]])
-#          
-#          DEC_chains[[run]] = DEC_chains_full[[run]][(chain_length*burnin):chain_length,]
-#          
-#          
-#          
-#        }
-#        
-#        
-#        for (chain in 1:length(DEC_chain_ind_vec)){
-#          
-#          
-#          DEC_post_dist[[DEC_chain_list[[chain]]]]=unlist(lapply( 1:length(DEC_chains), function(run) DEC_chains[[run]][,DEC_chain_ind_vec[[chain]] ]))/rescale
-#          
-#          # post_dist[[chain_list[[chain]]]]=unlist(lapply(test, function(run) run[,chain_ind_vec[[chain]] ]))
-#          
-#        }
-#        
-#        
-#        
-#        # post_dist[[chain_list[[chain]]]]=unlist(lapply( DEC_chains, function(chain) run[,chain_ind_vec[[run]]]))
-#        
-#        
-#      }
-#      
-#      
-#      # post_dist[[dir]][[chain_list[[chain]]]]=unlist(lapply( DEC_chains[[dir]], function(chain) run[,chain_ind_vec[[run]]]))
-#      
-      
-}
-    
+
+chain_par_vec = c(6:11, 18:20)-5
+chain_par_names = chain_list[chain_par_vec]
+chain_rj_vec = c(12:17) - 5
+
+RFBS_post_dist[[dir]][chain_rj_vec]
 
 unique(as.numeric(RFBS_post_dist[[dir]][[chain]]))
 
 RFBS_post_dens=list()
+RFBS_rj_dens=list()
+RFBS_names = names(RFBS_post_dist[[1]])
 
-for( dir in (1:length(RFBS_post_dist))[-106]){
+for( dir in (1:length(RFBS_post_dist))){
   RFBS_post_dens[[dir]]=list()
-  for( chain in 1:length(RFBS_post_dist[[dir]])){
-    RFBS_post_dens[[dir]][[chain]]=density(as.numeric(RFBS_post_dist[[dir]][[chain]]))
+  RFBS_rj_dens[[dir]]=list()
+  
+  for( i in 1:length(chain_par_vec)){
+    chain = chain_par_vec[[i]]
+    RFBS_post_dens[[dir]][[i]]      = density(as.numeric(RFBS_post_dist[[dir]][[RFBS_names[chain]]]))
+    names(RFBS_post_dens[[dir]][i]) = names(RFBS_post_dist[[dir]])[chain]
     
   }
-  
-names(RFBS_post_dens[[dir]])=   names(RFBS_post_dist[[dir]])
-
+  #names(RFBS_post_dens[[dir]])=   names(RFBS_post_dist[[dir]])[chain_par_vec]
+  for(  i in 1:length(chain_rj_vec)){
+    chain = chain_rj_vec[[i]]
+    
+    RFBS_rj_dens[[dir]][[i]]=density(as.numeric(RFBS_post_dist[[dir]][[RFBS_names[chain]]]))
+    names(RFBS_rj_dens[[dir]][i])=   names(RFBS_post_dist[[dir]])[chain]
+    
+  }
 }
 
 prior_chains=list()
-    
-######plot RFBS########
-     
+
+chain_rj_names = c("switch_rf1_l_s",  
+                   "switch_rf2_l_d",   "switch_rf1_g_s",  
+                   "switch_rf12_sw_s", "switch_rf2_l_s",  
+                   "switch_rf2_g_d",   "switch_rf2_g_s"  )
+rj_post_array_list = lapply(c(1, 15, 18), function(dir) do.call(cbind,RFBS_post_dist[[dir]][chain_rj_names]))
+names(rj_post_array_list)  = unlist(lapply(c(2, 16, 19), function(dir) RFBS_legend_names[[dir]]))
+
+
+
+library(tools)
+library(coda)
+library(ggplot2)
+library(patchwork)
+library(RevGadgets)
+library(RColorBrewer)
+
+# Directory Setup ---------------------------------------------------------
+
+
+# Basic Jointplot ---------------------------------------------------------
+
+#data <- read.csv(file=paste(data_dir,"/concatenated.model.log",sep=""),sep="\t",header=TRUE)
+
+for (experiment  in 1:length(rj_post_array_list)){
 {
-
-pdf(paste("3correctIEA_rescaled_EXP_0p5_bvib_RFBS_DEC_density.pdf", sep=""),width = 8,height = 10)
-
-
+  data = rj_post_array_list[[experiment]]
   
-  n <- 8
-  palette <- distinctColorPalette(n)
-  
-  palette=c("green", "yellow", "cyan", "black", "grey", "red4", "blue4", "magenta" )
-  
-  xmax_vec=c(6.0,6.0,10.0,25,10.0,1.0)/rescale
-  
-  col_vec=c("yellow3", "orange", "green", "brown", "dark gray", "red4", "blue4", "purple" )
-  
-  prior_col="gray"
-  
-  col_vec[[length(col_vec)+1]]=prior_col
+  experi_name = names(rj_post_array_list)[[experiment]]
   
   
-{
+  colnames(data)
   
-
-
-    par(mfrow=c(3,2))
-    
-    
-    par_names=c(
-            "RFBS 1->0",
-            "RFBS 0->1",
-            "RFBS 2->1",
-            "RFBS 0->2",
-            "RFBS 1->2",
-            "DEC and RFBS clado split prob"
-
-            )
-
-    for (z in 1:6){
-      
-      chain=c(2,1,5,3,4,6)[[z]]
-      
-      #plot(post_dist, main=chain_list[[chain]])
-      prior_dist=density(unlist(sample(RFBS_prior_test[,chain_ind_vec[[chain]]]/rescale, nrow(RFBS_prior_test), replace = T)))
-      
-      #abline(v=sim_pars[sim,chain],col=2)
-      x_min=min(unlist(lapply(RFBS_post_dist, function(i) min( i[[chain]]))))
-      x_min=x_min-x_min*.3
-      x_max=max(unlist(lapply(RFBS_post_dist, function(i) max( i[[chain]]))))
-      if(chain!=length(chain_ind_vec)){
-        x_max=x_max/5
-        x_max=xmax_vec[[z]]
+  joint <- function(param1, param2) {
+    param1b <- param1#paste("rj_",gsub("\\[|\\]", ".", param1),sep="")
+    param2b <- param2 #paste("rj_",gsub("\\[|\\]", ".", param2),sep="")
+    rj1 <- data[,param1b]
+    rj2 <- data[,param2b]
+    joints <- c(0,0,0,0)
+    for (i in 1:length(rj1)) {
+      if (rj1[i] == 1) {
+        if (rj2[i] == 1) {joints[1] <- joints[1] + 1}
+        else {joints[2] <- joints[2] + 1}
       }
-      
-      y_min=min(c(unlist(lapply(RFBS_post_dist, function(i) min( density(i[[chain]])$y   )))), min(  prior_dist$y)   )
-      y_min=y_min-y_min*.3
-      y_max=max(c(unlist(lapply(RFBS_post_dist, function(i) max( density(i[[chain]])$y   )))), max(  prior_dist$y)   )
-      y_max=y_max+y_max*.3
-      
-      
-      plot( c(0, x_max),c(0, y_max), main=par_names[[chain]],type = "n")
-      
-
-      
-      
-      #polygon(prior_dist, col=t_col(prior_col,50) )
-      
-      
-      if(chain==2){
-        
-#        legend("topright", legend=RFBS_legend_names, fill =unlist(lapply(col_vec, function(c) t_col(c, 20))))
-        
+      else {
+        if (rj2[i] == 1) {joints[3] <- joints[3] + 1}
+        else {joints[4] <- joints[4] + 1}
       }
+    }
+    joints <- round(joints/sum(joints),2)
+    return(joints)
+  }
+  
+  jointplot <- function(param1,param2, xname, yname, title) {
+    joints <- joint(param1,param2)
+    dataframe <- data.frame(matrix(c(0,1,2,0,1,2),ncol=2))
+    plot <- ggplot(dataframe,aes(x=X1,y=X2)) +
+      geom_rect(xmin=1,xmax=2,ymin=1,ymax=2,color="black",fill="blue",alpha=joints[1]) +
+      geom_rect(xmin=1,xmax=2,ymin=0,ymax=1,color="black",fill="blue",alpha=joints[2]) +
+      geom_rect(xmin=0,xmax=1,ymin=1,ymax=2,color="black",fill="blue",alpha=joints[3]) +
+      geom_rect(xmin=0,xmax=1,ymin=0,ymax=1,color="black",fill="blue",alpha=joints[4]) +
+      #annotate(geom="text",x=1.5,y=1.5,label=joints[1], size=10, colour = "white") +
+      #annotate(geom="text",x=1.5,y=.5,label=joints[2] , size=10, colour = "white") +
+      #annotate(geom="text",x=.5,y=1.5,label=joints[3] , size=10, colour = "white") +
+      #annotate(geom="text",x=.5,y=.5,label=joints[4]  , size=10, colour = "white") +
+      annotate(geom="text",x=1.5,y=1.5,label=joints[1], size=10) +
+      annotate(geom="text",x=1.5,y=.5,label=joints[2], size=10) +
+      annotate(geom="text",x=.5,y=1.5,label=joints[3], size=10) +
+      annotate(geom="text",x=.5,y=.5,label=joints[4], size=10) +
       
-      
-      for( dir in 1:length(RFBS_chains)){
-        
-
-           #polygon(density(RFBS_post_dist[[dir]][[chain]]), col=t_col(col_vec[[dir]],70))
-           
-        #if(chain==6){
-        #  
-        #  polygon(density(DEC_post_dist$clado_split_prob), border="orange", col=t_col("orange",20))
-        #  
-        #  legend("topright", legend=c(RFBS_legend_names,"DEC"), fill =c(unlist(lapply(col_vec, function(c) t_col(c, 20))), "orange"))
-        #  
-        #  
-        #}
-
-      }
-      
-      #polygon(prior_dist, col=NA, border=t_col(prior_col,80) )
-      
-
-      for( dir in 1:length(RFBS_chains)){
-        
-        
-        polygon(density(RFBS_post_dist[[dir]][[chain]])
-                , col=NA,lwd=0.5, border = t_col(col_vec[[dir]],0),  lwd=5 )
-        
-        
-      }
-      
-     # polygon(prior_dist, col=NA, border=t_col(prior_col,0), lwd=5 )
-      
-      legend('topleft',legend=RFBS_legend_names, 
-             col =unlist(lapply(col_vec, function(c) t_col(c, 20))),
-             lwd = 5, xpd = TRUE, cex = 1, seg.len=1, bty = 'n', ncol=4)
-      
-      
-    } 
+      scale_x_continuous(limits=c(0,2),breaks=c(.5,1.5),labels=c("Off","On")) +
+      scale_y_continuous(limits=c(0,2),breaks=c(.5,1.5),labels=c("Off","On")) +
+      labs(title=title,x=xname,y=yname) +
+      theme_classic() +
+      theme(aspect.ratio=1,plot.title=element_text(hjust=.5),axis.line=element_blank(),axis.ticks=element_blank(),axis.text.y=element_text(angle=90,hjust=0.5,vjust= -.3),axis.text.x=element_text(vjust=1.5))
+    return(plot)
+  }
+  
+  
+  par_names=c(
+    expression(paste("Enabled loss "      , italic(l)[1 %->% 0])), 
+    expression(paste("Enabled gain "      , italic(g)[0 %->% 1])),
+    expression(paste("Established switch ", italic(sw)[2])),
+    expression(paste("Established loss "  , italic(l)[2 %->% 1])),
+    expression(paste("Double gain "       , italic(g)[0 %->% 2])),
+    expression(paste("Established gain "  , italic(g)[1 %->% 2])),
+    expression(paste("Double loss "       , italic(l)[2 %->% 0]))
     
-    #par(fig = c(0, 1, 0, 1), oma = c(0, 0, 0, 0), mar = c(0, 0, 0, 0), new = TRUE)
-    #plot(1, type = "n", axes=FALSE, xlab="", ylab="")
-    #plot_colors <- c("blue","black", "green", "orange", "pink")
-    #legend(x = "top",inset = 0,
-    #       legend = c("Fabricated Metal", "Iron and Steel", "Paper","Beverages", "Tobacco"), 
-    #       col=plot_colors, lwd=5, cex=.5, horiz = TRUE)
-    #legend(x = "top",inset = 0, legend=RFBS_legend_names, fill =unlist(lapply(col_vec, function(c) t_col(c, 20)))
-    #        ,cex=.5, horiz = TRUE)
-   # par(fig = c(0, 1, 0, 1), oma = c(0, 0, 0, 0), mar = c(0, 0, 0, 0), new = TRUE)
-   # plot(0, 0, type = 'l', bty = 'n', xaxt = 'n', yaxt = 'n')
-   # legend('bottom',legend=RFBS_legend_names, 
-   #        col =unlist(lapply(col_vec, function(c) t_col(c, 20))),
-   #        lwd = 5, xpd = TRUE, cex = 1, seg.len=1, bty = 'n', ncol=4)
-}
-  dev.off()
-}
-    
-
-
-
-
-RFBS_post_dist=RFBS_post_dist[-106]  #exclude bad run
-RFBS_legend_names=RFBS_legend_names[-106]  #exclude bad run
-RFBS_chains = RFBS_chains[-106]
-
-
-{
-  
-  
-  
-  pdf(paste("3biome_all_treatments_Donoghue_EXP_0p5_bvib_RFBS_density_violin.pdf", sep=""),width = 10,height = 10)
-  
-  
-  
-  n <- 8
-  palette <- distinctColorPalette(n)
-  
-  palette=c("green", "yellow", "cyan", "black", "grey", "red", "blue", "magenta" )
-  
-  xmax_vec=c(6.0,6.0,10.0,25,10.0,1.0)/rescale
-  
-  ymax=c(rep(1.5, 5),rep(1.0, 3))
- 
-  
-  col_vec=c("yellow3", "orange2", "green4", "chocolate4", "gray31", "red4", "blue4", "purple4" )
-  
-  #col_vec=c("yellow", "orange", "green", "brown", "gray31", "red", "blue", "purple" )
-  
-  prior_col="gray"
-  
-  col_vec[[length(col_vec)+1]]=prior_col
-  
-  
-
+    #expression(paste("Speciation event "      , italic(b))          ),
+    #expression(paste("Speciation event "      , italic(s))          ),
+    #expression(paste("Speciation event "      , italic(e))          )
+  )
   {
+  w1 <- jointplot("switch_rf1_g_s","switch_rf2_g_d", par_names[[2]], par_names[[5]], "Enabled Gain vs.\nDouble Gain")
+  w2 <- jointplot("switch_rf2_g_s","switch_rf2_g_d", par_names[[6]], par_names[[5]], "Established Gain vs.\nDouble Gain")
+  w3 <- jointplot("switch_rf1_g_s","switch_rf2_g_s", par_names[[2]], par_names[[6]], "Enabled Gain vs.\nEstablished Gain")
+  w4 <- jointplot("switch_rf1_g_s","switch_rf12_sw_s", par_names[[2]], par_names[[3]], "Enabled Gain vs.\nEstablished Switch")
+  w5 <- jointplot("switch_rf2_g_s","switch_rf12_sw_s", par_names[[6]], par_names[[3]], "Established Gain vs.\nEstablished Switch")
+  w6 <- jointplot("switch_rf2_g_d","switch_rf12_sw_s", par_names[[5]], par_names[[3]], "Double Gain vs.\nEstablished Switch")
+
+  
+  
+  
+  axis_plot <- ggplot() +
+    #labs(x=bquote("Categorical (" ~ sigma ~ ")"),y=bquote("Quantitative (" ~ phi ~ ")")) +
+    theme_classic() +
+    theme(aspect.ratio=1.5,line=element_blank())
+  inner_plot <- w1 + w2 + w3 + w4 + w5 + w6 +
+    plot_layout(ncol=2) &
+    theme(text=element_text(size=))
+  joint_plot <- axis_plot + inset_element(inner_plot,left=0,bottom=0,right=1,top=1)
+  
+  pdf(file=paste("~/Projects/RFBS-main/outfiles/emp/viburnum/resub_figs/gain_RJ_pairjoint_2l_", experi_name,  ".pdf", sep=""), width = 7.5, height =  10)
+  print(joint_plot)
+  dev.off()
+  }
+  
   {
-    
-    
-    
-    #par(mfrow=c(3,2))
-   # par(oma = c(4,1,1,1), mfrow = c(4, 2), mar = c(2, 2, 2, 2))
-    # Increase the bottom outer margin to provide more space for labels
-    par(oma = c(6, 1, 1, 1))  # Increase the bottom outer margin
-    
-    # Increase the bottom margin of each plot to prevent label overlap
-    # The 'mar' parameter takes the form c(bottom, left, top, right)
-    par(mar = c(5, 2, 2, 2))  # Increase the bottom margin
-    
-    # Set the layout of the plotting area to 4x2
-    par(mfrow = c(4, 1))
-    
-    par_names=c(
-      "1->0",
-      "0->1",
-      "2->1",
-      "0->2",
-      "1->2",
-      "clado split prob"
-      
-    )
-    par_names=c(
-      expression(italic(l)[1 %->% 0]), 
-      expression(italic(g)[0 %->% 1]),
-      expression(italic(l)[2 %->% 1]),
-      expression(italic(g)[0 %->% 2]),
-      expression(italic(g)[1 %->% 2]),
-      expression(italic(b)[i]),
-      expression(italic(w)[i]),
-      expression(italic(e)[i])
-    )
-    
-    
-    for (z in 1:8){
-      
-      chain=c(2,1,5,3,4,6,7,8)[[z]]
-      ymax= c(0.5, 2.5, 1.0, 1.5, 0.25, 1.0,1.0,1.0)
-      #plot(post_dist, main=chain_list[[chain]])
-      prior_chain=unlist(sample(RFBS_prior_test[,chain_ind_vec[[chain]]], nrow(RFBS_prior_test), replace = T))
-      prior_dist=density(prior_chain)
-      
-      #abline(v=sim_pars[sim,chain],col=2)
-      #x_min=min(unlist(lapply(RFBS_post_dist, function(i) min( i[[chain]]))))
-      #x_min=x_min-x_min*.3
-      #x_max=max(unlist(lapply(RFBS_post_dist, function(i) max( i[[chain]]))))
-      #if(chain!=length(chain_ind_vec)){
-      #  x_max=x_max/5
-      #  x_max=xmax_vec[[z]]
-      #}
-      
-      y_min=min(c(unlist(lapply(RFBS_post_dist, function(i) min( density(as.numeric(i[[chain]]))$y   )))))#, min(  prior_dist$y)   )
-      y_min=y_min-y_min*.3
-      y_max=max(c(unlist(lapply(RFBS_post_dist, function(i) max( density(as.numeric(i[[chain]]))$y   )))))#, max(  prior_dist$y)   )
-      y_max=y_max+y_max*.3
-      
-      #ymax= c(0.5, 0.5, 1.0, 1.5, 0.5, 1.0,1.0,1.0)
-      
-      
-      #plot( c(0, x_max),c(0, y_max), main=par_names[[chain]],type = "n")
-      
-      
-      
-      
-      #polygon(prior_dist, col=t_col(prior_col,50) )
-      
-      
-      if(chain==2){
-        
-        #        legend("topright", legend=RFBS_legend_names, fill =unlist(lapply(col_vec, function(c) t_col(c, 20))))
-        
-      }
-      
-      
-      for( dir in (1:length(RFBS_chains))){
-        
-        print(dir)
-        
-        #polygon(density(RFBS_post_dist[[dir]][[chain]]), col=t_col(col_vec[[dir]],70))
-        
-        #if(chain==6){
-        #  
-        #  polygon(density(DEC_post_dist$clado_split_prob), border="orange", col=t_col("orange",20))
-        #  
-        #  legend("topright", legend=c(RFBS_legend_names,"DEC"), fill =c(unlist(lapply(col_vec, function(c) t_col(c, 20))), "orange"))
-        #  
-        #  
-        #}
-        
-      }
-      
-      #polygon(prior_dist, col=NA, border=t_col(prior_col,80) )
-      dists=cbind(do.call(cbind, c(lapply(1:length(RFBS_chains), function(dir) as.numeric(RFBS_post_dist[[dir]][[chain]])) ) ),unlist(prior_chain))
-      
-
-      vioplot(dists,#[,RFBS_legend_order],
-              col=col_vec, #[RFBS_legend_order],
-        #names=RFBS_legend_names,
-        main=par_names[[chain]],
-        ylim=c(0,ymax[[z]]),
-       names=RFBS_legend_names,#rep("",30),#rep("",9)
-        cex.main=2,
-       cex.axis=0.5,
-       #xlab=RFBS_legend_names[RFBS_legend_order] ,
-       las=2
-          
-        )
-      
-      #for( dir in 1:length(RFBS_chains)){
-      #  
-      #  
-      #  polygon(density(RFBS_post_dist[[dir]][[chain]])
-      #          , col=NA,lwd=0.5, border = t_col(col_vec[[dir]],0),  lwd=5 )
-      #  
-      #  
-      #}
-      
-      #polygon(prior_dist, col=NA, border=t_col(prior_col,0), lwd=5 )
-      
-      #legend('topleft',legend=RFBS_legend_names, 
-      #       col =unlist(lapply(col_vec, function(c) t_col(c, 20))),
-      #       lwd = 5, xpd = TRUE, cex = 1, seg.len=1, bty = 'n', ncol=4)
-      #
-      
-    } 
-    
-    #plot(1, type = "n", axes=FALSE, xlab="", ylab="")
-    #plot_colors <- c("blue","black", "green", "orange", "pink")
-    #legend(x = "top",inset = 0,
-    #       legend = c("Fabricated Metal", "Iron and Steel", "Paper","Beverages", "Tobacco"), 
-    #       col=plot_colors, lwd=5, cex=.5, horiz = TRUE)
-    #legend(x = "top",inset = 0, legend=RFBS_legend_names, fill =unlist(lapply(col_vec, function(c) t_col(c, 20)))
-    #        ,cex=.5, horiz = TRUE)
-    # par(fig = c(0, 1, 0, 1), oma = c(0, 0, 0, 0), mar = c(0, 0, 0, 0), new = TRUE)
-    # plot(0, 0, type = 'l', bty = 'n', xaxt = 'n', yaxt = 'n')
-    # legend('bottom',legend=RFBS_legend_names, 
-    #        col =unlist(lapply(col_vec, function(c) t_col(c, 20))),
-    #        lwd = 5, xpd = TRUE, cex = 1, seg.len=1, bty = 'n', ncol=4)
-  }
+  w1 <- jointplot("switch_rf1_l_s","switch_rf2_l_d"  , par_names[[1]], par_names[[7]], "Enabled Loss vs.\nDouble Loss")
+  w2 <- jointplot("switch_rf2_l_s","switch_rf2_l_d"  , par_names[[4]], par_names[[7]], "Established Loss vs.\nDouble Loss")
+  w3 <- jointplot("switch_rf1_l_s","switch_rf2_l_s"  , par_names[[1]], par_names[[4]], "Enabled Loss vs.\nEstablished Loss")
+  w4 <- jointplot("switch_rf1_l_s","switch_rf12_sw_s", par_names[[1]], par_names[[3]], "Enabled Loss vs.\nEstablished Switch")
+  w5 <- jointplot("switch_rf2_l_s","switch_rf12_sw_s", par_names[[4]], par_names[[3]], "Established Loss vs.\nEstablished Switch")
+  w6 <- jointplot("switch_rf2_l_d","switch_rf12_sw_s", par_names[[7]], par_names[[3]], "Established Loss vs.\nEstablished Switch")
   
-    par(fig = c(0, 1, 0, 1), oma = c(0, 0, 0, 0), mar = c(0, 0, 0, 0), new = TRUE)
-    plot(0, 0, type = "n", bty = "n", xaxt = "n", yaxt = "n")  
-   #legend('bottom',
-   #     legend = RFBS_legend_names[RFBS_legend_order], 
-   #     col = col_vec[RFBS_legend_order], lwd = 5, xpd = TRUE, cex = 2, seg.len=0.3,ncol = 9, bty = 'n')
-  }
   
+  
+  
+  axis_plot <- ggplot() +
+    #labs(x=bquote("Categorical (" ~ sigma ~ ")"),y=bquote("Quantitative (" ~ phi ~ ")")) +
+    theme_classic() +
+    theme(aspect.ratio=1.5,line=element_blank())
+  inner_plot <- w1 + w2 + w3 + w4 + w5 + w6 +
+    plot_layout(ncol=2) &
+    theme(text=element_text(size=))
+  joint_plot <- axis_plot + inset_element(inner_plot,left=0,bottom=0,right=1,top=1)
+  
+  pdf(file=paste("~/Projects/RFBS-main/outfiles/emp/viburnum/resub_figs/loss_RJ_pairjoint_2l_", experi_name,  ".pdf", sep=""), width = 7.5, height =  10)
+  print(joint_plot)
   dev.off()
+  }
 }
-
-
-
-######plot DEC########
+}
+  # Big Jointplot -----------------------------------------------------------
+  for (experiment  in 1:length(rj_post_array_list)){
     
-    DEC_chain_ind_vec
-    
+  
+  par_names=c(
+    expression(paste("Enabled loss "      , italic(l)[1 %->% 0])), 
+    expression(paste("Double loss "       , italic(l)[2 %->% 0])),
+    expression(paste("Enabled gain "      , italic(g)[0 %->% 1])),
+    expression(paste("Established switch ", italic(sw)[2])),
+    expression(paste("Established loss "  , italic(l)[2 %->% 1])),
+    expression(paste("Double gain "       , italic(g)[0 %->% 2])),
+    expression(paste("Established gain "  , italic(g)[1 %->% 2]))
 
-DEC_par_names=c("DEC 0->2", "DEC 2->0")
-
-    for (chain in c(1,2)){
-      
-      
-      
-      #plot(post_dist, main=chain_list[[chain]])
-      #prior_dist=density(unlist(sample(DEC_prior_test[,chain_ind_vec[[chain]]], nrow(DEC_prior_test), replace = T)))
-      
-      #abline(v=sim_pars[sim,chain],col=2)
-      x_min=min(DEC_post_dist[[chain]])
-      x_min=x_min
-      x_max=max((DEC_post_dist[[chain]]))
-      x_max=x_max/1.6
-
-      y_min=min(unlist(lapply(DEC_post_dist, function(i) min( density(i)$y   ))))  
-      y_min=y_min-y_min*.3
-      y_max=max(c(unlist(lapply(DEC_post_dist, function(i) max( density(i)$y   ))))  )
-      y_max=y_max+y_max*.3
-      
-      
-      plot( c(0, x_max),c(0, y_max), main=DEC_par_names[[ chain]],type = "n")
-      
-      
-    
-      
-      
-      #polygon(prior_dist, col=t_col(3,50) )
-      
-      
-      #if(chain==2){
-      #  
-      #  legend("topright", legend=DEC_legend_names, fill =unlist(lapply(col_vec, function(c) t_col(c, 20))))
-      #  
-      #}
-      
-      
-
-        polygon(density(DEC_post_dist[[chain]]), col=t_col("orange",20))
-
-
-     # polygon(prior_dist, col=NA, border=t_col(3,50) )
-      
-      for( dir in 1:length(DEC_chains)){
-        
-        polygon(density(DEC_post_dist[[chain]]), col=NA, border = t_col("orange",0))
-
-        
-      }
-    } 
-    
-
- dev.off()   
-    
-#}
-        
+    #expression(paste("Speciation event "      , italic(b))          ),
+    #expression(paste("Speciation event "      , italic(s))          ),
+    #expression(paste("Speciation event "      , italic(e))          )
+  )
   
-#}
-
-
-
-
-
-      
-
-###############plot
-
-{
+  data_onoff <- data
+  rjparams <- colnames(data)
   
-  pdf(paste("~/Projects/realfun_Biome/",dir_name,"/comp_density_rf_DEC_3bio.pdf", sep=""))
+  sums <- rowSums(data_onoff)
+  onoff_sums <- cbind(data_onoff, sums)
+  sums <- rep(sums, 10)
+  onoff <- data.frame(sums)
+  total <- nrow(data_onoff)
+  
+  total_df <- data.frame(matrix(ncol=2,nrow=1))
+  for (i in rjparams) {
+    param <- i
+    count <- sum(data_onoff[,param])
+    row <- data.frame(t(c(i,count)))
+    total_df <- rbind(total_df,row)
+  }
+  total_df <- total_df[-(1),]
+  colnames(total_df) <- c("param","percent")
+  total_df$percent <- as.numeric(total_df$percent)/total
+  
+  stacked_df <- data.frame(matrix(ncol=3,nrow=1))
+  for (i in 0:6) {
+    onoff_sums_i <- onoff_sums[which(onoff_sums[,ncol(onoff_sums)]==i),]
+    for (j in rjparams) {
+      param <- j
+      count <- sum(onoff_sums_i[,param])
+      row <- data.frame(t(c(i,j,count)))
+      stacked_df <- rbind(stacked_df,row)
+    }
+  }
+  stacked_df <- stacked_df[-(1),]
+  colnames(stacked_df) <- c("onoff","param","count")
+  stacked_df$count <- as.numeric(stacked_df$count)
+  
+  levels <- colnames(data)
+  labels <- par_names
   
   
-
-  par(mfrow=c(2,3))
+  palette1 <- brewer.pal(8,"Dark2")
+  palette2 <- brewer.pal(8,"Set2")
+  palette3 <- c(rbind(palette1))
   
-  library(ggplot2)
+  total_plot <- ggplot(total_df,aes(x=factor(param,levels=levels),y=percent,fill=factor(param,levels=levels))) +
+    geom_bar(stat="identity") +
+    scale_fill_manual(labels=labels,values=palette3) +
+    scale_y_continuous(limits=c(0,1),labels=c("0.00","0.25","0.50","0.75","1.00"),expand=c(0,0)) +
+    labs(fill="Parameter",x="Parameter",y="Frequency") +
+    theme_bw() +
+    theme(aspect.ratio=.4,panel.grid.minor=element_blank(),panel.grid.major.x=element_blank(),axis.text.x=element_blank(),axis.ticks.x=element_blank(),plot.margin=margin(8,8,4,8))
   
+  onoff_plot <- ggplot(onoff, aes(sums)) +
+    geom_histogram(aes(y=..density..), binwidth=1, boundary=.5, color="black", size=.1, fill="white") +
+    geom_density(aes(linetype="Observed"), adjust=4, linewidth=1) +
+    geom_density(aes(rbinom(nrow(onoff),6,.5), linetype="Prior"), adjust=4, linewidth=1) +
+    scale_linetype_manual(values=c("Observed"="solid","Prior"="dashed")) +
+    scale_x_continuous(breaks=seq(0,6,1), limits=c(-.5,6.5), expand=c(0,0)) +
+    scale_y_continuous(limits=c(0,2),breaks=seq(0.0, 1.5, .5),labels=paste(seq(0.0, 1.5, .5)),expand=c(0,0)) +
+    labs(y="Density", x=NULL, linetype="Distribution") +
+    theme_bw() +
+    theme(aspect.ratio=.3,panel.grid.minor=element_blank(),panel.grid.major.x=element_blank(),axis.text.x=element_blank(),axis.ticks.x=element_blank(),plot.margin=margin(4,8,4,8))
   
-  dat <- data.frame(Realized_Affinity_Loss_Rate = c(RFBS_post_dist[[1]]$X_rf2_l_s,post_dist[[2]]$X_l )
-                    , lines = rep(c("RF real loss", "DEC loss"), each = length(post_dist[[1]]$X_rf2_l_s)))
+  stacked_plot <- ggplot(stacked_df,aes(x=onoff,y=count,fill=factor(param,levels=levels))) +
+    geom_bar(stat="identity",position="fill",width=1,color="black",size=.1) +
+    scale_x_discrete(limits=factor(seq(0,6,1)),expand=c(0,0)) +
+    scale_y_continuous(breaks=seq(0,1,.25),labels=c("0.00","0.25","0.50","0.75","1.00"),expand=c(0,0)) +
+    scale_fill_manual(labels=labels,values=palette3) +
+    labs(fill="Parameter",x="Number of 'ON' Parameters",y="Representation By Bin") +
+    theme_bw() +
+    theme(aspect.ratio=.75,panel.grid.minor=element_blank(),panel.grid.major.x=element_blank(),legend.position="none",plot.margin=margin(4,8,8,8))
   
-  #ggplot(dat, aes(x = Realized_Affinity_Loss_Rate, fill = lines)) + geom_density(alpha = 0.5)
+  big_onoff_plot <- total_plot + onoff_plot + stacked_plot + plot_layout(ncol=1,guides="collect")
   
-  ggplot(dat, aes(x = Realized_Affinity_Loss_Rate, fill = lines)) + geom_density(alpha = 0.5)+scale_x_continuous(limits = c(-0.1, 50)) +ggtitle("Realized Biome Affinity Losses")+  theme(plot.title = element_text(hjust = 0.5))   
-  
-  #plot(post_dist, main=chain_list[[chain]])
-  
-  #abline(v=sim_pars[sim,chain],col=2)
-  
-  dat <- data.frame(Realized_Affinity_Gain_Rate = c(post_dist[[1]]$X_rf2_g_s,post_dist[[2]]$X_g,post_dist[[1]]$X_rf2_g_d )
-                    , lines = rep(c("RF real gain", "DEC gain", "RF real+fund gain"), each = length(post_dist[[1]]$X_rf2_g_s)))
-  
-  ggplot(dat, aes(x = Realized_Affinity_Gain_Rate, fill = lines)) + geom_density(alpha = 0.5)+scale_x_continuous(limits = c(-0.1, 20)) +ggtitle("Realized Biome Affinity Gains")+  theme(plot.title = element_text(hjust = 0.5))   
-  
-  
-  
-  #mtext(sim_pars_strings_unique[[sim]],                   # Add main title
-  #      side = 3,
-  #      line = - 2,
-  #      outer = TRUE)
-  #
-  
+  pdf(file=paste("~/Projects/RFBS-main/outfiles/emp/viburnum/resub_figs/2l_big_onoff_plot_",experi_name,".pdf", sep=""))
+  print(big_onoff_plot)
   dev.off()
   
 }
-
-
-
-
-
-
-
-
-
-
-isin_HPD=sim_pars
-ESS=sim_pars
-
-post_mean=sim_pars
-post_median=sim_pars
-
-
-
-
-
-for (sim in 1:length(sim_pars_strings_unique)){
-  #sort files based on same simulating pars
-  runs=run_list[sim_pars_strings==sim_pars_strings_unique[[sim]]]
   
-  test=lapply(runs, function(run) read.table(paste(dir_name,run, sep="/"), header = T))
-  
-  for (run in 1:length(runs)){
-    
-    chain_length=nrow(test[[run]])
-    
-    test[[run]] = test[[run]][(chain_length*burnin):chain_length,]
-    
-  }
-  
-  
-  npars=(ncol(test[[1]])-4)/2
-  
-  chain_ind_vec=5:(4+npars)
-  
-  chain_list=colnames(test[[1]])[chain_ind_vec]
-  
-  par(mfrow=c(2,3))
-  
-  for (chain in 1:length(chain_ind_vec)){
-    
-    HPD=HPDinterval(as.mcmc(test[[run]][,chain_ind_vec[[chain]]]), prob=0.9)      
-    ESS[sim,chain]=effectiveSize(as.mcmc(test[[run]][,chain_ind_vec[[chain]]]))   
-    isin_HPD[sim,chain]=between(sim_pars[sim,chain],HPD[1],HPD[2])
-    post_mean[sim,chain]=mean(test[[run]][,chain_ind_vec[[chain]]])
-    post_median[sim,chain]=median(test[[run]][,chain_ind_vec[[chain]]])
-    
-    
-    
-  }
-  
-}
 
 
 
-print(isin_HPD)
-
-print(colSums(isin_HPD)/nrow(isin_HPD))
-print(dir_name)
-
-
-
-ESS_total=ESS
-HPD_total=HPD
-isin_HPD_total=isin_HPD
-
-
-
-sum(ESS_total<100)/length(ESS_total)
-
-post_mean_total=post_mean
-post_median_total=post_median
-sim_pars_total=sim_pars
-
-
-{
-  pdf(paste("~/Projects/realfun_Biome/",dir_name,"/posterior_median_lineplot.pdf", sep=""))
-  
-  par(mfrow=c(2,3))
-  
-  for (i in 1:ncol(post_median_total)){
-    
-    min=min(unlist(lapply(test, function(run) run[,chain_ind_vec[[chain]]]) ))
-    min=min-min*.3
-    max=max(unlist(lapply(test, function(run) run[,chain_ind_vec[[chain]]]) ))
-    max=max+max*.3
-    
-    plot(c(0, 0), c(max, max), main=chain_list[[chain]],type = "n")
-    
-    lines(sim_pars_total[,i], post_median_total[,i])
-    abline(a=0,b=1)
-  }
-  
-  dev.off()
-}
-
-}
-#  }
-
-#}
-#post_median_total/
-
-
-#######
-
-ESS_total=rbind(ESS_total,ESS)
-
-HPD_total=rbind(HPD_total,HPD)
-isin_HPD_total=rbind(isin_HPD_total,isin_HPD)
-post_mean_total=rbind(post_mean_total,post_mean)
-post_median_total=rbind(post_median_total,post_median)
-sim_pars_total=rbind(sim_pars_total,sim_pars)
-colSums(isin_HPD_total)/nrow(isin_HPD_total)
