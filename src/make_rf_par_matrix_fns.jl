@@ -392,9 +392,9 @@ function   get_emp_tip_probs(rf_states, tip_states, fund_adj_matrix=NaN, forbidd
         if forbidden_fund!==NaN
 
 
-            if(size(forbidden_aff)[2]>1)
+            if ndims(forbidden_fund) > 1
 
-                for col in 1:length(size(forbidden_aff))
+                for col in axes(forbidden_fund, 2)
 
                     tip_state_group=drop_forbid_fund_states(tip_states[i], #observed state
                     tip_state_group, #group of possible states given observed state
